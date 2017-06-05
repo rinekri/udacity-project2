@@ -3,7 +3,7 @@
 ![Udacity logo](https://www.kartikarora.me/img/blog/nanodegree/andnano.jpeg)
 
 # Android Developer Nanodegree
-Udacity Project - Popular Movies, Stage 1
+Udacity Project - Popular Movies, Stage 2
 
 ## How set API key
 1. Create file **gradle.properties** in the _poject/app_ directory.
@@ -12,16 +12,31 @@ Udacity Project - Popular Movies, Stage 1
 
 where **111111** corresponding api key.
 
-## Goals
+## Goals | Main
 Goal | Progress
 ------------ | -------------
-Movies are displayed in the main layout via a grid of their corresponding movie poster thumbnails. | Resolved 
-UI contains an element (i.e a spinner or settings menu) to toggle the sort order of the movies by: most popular, highest rated. | Resolved
+UI contains an element (e.g., a spinner or settings menu) to toggle the sort order of the movies by: **most popular**, **highest rated**. | Resolved
+Movies are displayed in the main layout via a grid of their corresponding movie poster thumbnails. | Resolved
 UI contains a screen for displaying the details for a selected movie. | Resolved
-Movie details layout contains **title**, **release date**, **movie poster**, **vote average**, and **plot synopsis**. | Resolved
-When a user changes the sort criteria (“most popular and highest rated”) the main view gets updated correctly. | Resolved
+Movie Details layout contains **title**, **release date**, **movie poster**, **vote average**, and **plot synopsis**. | Resolved
+Movie Details layout contains a section for displaying trailer videos and user reviews. | In Progress
+When a user changes the sort criteria (most popular, highest rated, and **favorites**) the main view gets updated correctly. | In Progress
 When a movie poster thumbnail is selected, the movie details screen is launched. | Resolved
+When a trailer is selected, app uses an Intent to launch the trailer. | In Progress
+In the movies detail screen, a user can tap a button (for example, a star) to mark it as a Favorite. | In Progress
 In a background thread, app queries the **/movie/popular** or **/movie/top_rated** API for the sort criteria specified in the settings menu. | Resolved
+App requests for related videos for a selected movie via the **/movie/{id}/videos** endpoint in a background thread and displays those details when the user selects a movie. | In Progress
+App requests for user reviews for a selected movie via the **/movie/{id}/reviews** endpoint in a background thread and displays those details when the user selects a movie. | In Progress
+The titles and ids of the user's favorite movies are stored in a **ContentProvider backed by a SQLite database**. This ContentProvider is updated whenever the user favorites or unfavorites a movie. | In Progress
+When the "favorites" setting option is selected, the main view displays the entire favorites collection based on movie ids stored in the ContentProvider. | In Progress
+
+## Goals | Additional
+Goal | Progress
+------------ | -------------
+Use Service's | Plan
+Use BroadcastReceiver's | Plan
+Use JobDispatcher (or alternative) | Plan
+Use push notifications | Plan
 
 ## Libs, plugins, extensions
 Retrofit</br>
