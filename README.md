@@ -20,7 +20,7 @@ Movies are displayed in the main layout via a grid of their corresponding movie 
 UI contains a screen for displaying the details for a selected movie. | Resolved
 Movie Details layout contains **title**, **release date**, **movie poster**, **vote average**, and **plot synopsis**. | Resolved
 Movie Details layout contains a section for displaying trailer videos and user reviews. | In Progress
-When a user changes the sort criteria (most popular, highest rated, and **favorites**) the main view gets updated correctly. | In Progress
+When a user changes the sort criteria (most popular, highest rated, and **favorites**) the main view gets updated correctly. | Resolved
 When a movie poster thumbnail is selected, the movie details screen is launched. | Resolved
 When a trailer is selected, app uses an Intent to launch the trailer. | In Progress
 In the movies detail screen, a user can tap a button (for example, a star) to mark it as a Favorite. | In Progress
