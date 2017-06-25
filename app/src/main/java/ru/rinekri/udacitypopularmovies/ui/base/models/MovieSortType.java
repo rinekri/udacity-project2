@@ -7,7 +7,8 @@ import ru.rinekri.udacitypopularmovies.R;
 
 public enum MovieSortType {
   Popular(R.string.main_sort_popular_movies),
-  TopRated(R.string.main_sort_top_rated_movies);
+  TopRated(R.string.main_sort_top_rated_movies),
+  Favorites(R.string.main_sort_favorites_movies);
 
   MovieSortType(@StringRes Integer nameRes) {
     this.nameRes = nameRes;
@@ -19,7 +20,7 @@ public enum MovieSortType {
     return nameRes;
   }
 
-  public String reolveName(Context context) {
+  public String resolveName(Context context) {
     return context.getString(nameRes);
   }
 }

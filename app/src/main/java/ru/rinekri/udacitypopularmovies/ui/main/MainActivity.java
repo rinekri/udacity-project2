@@ -72,7 +72,7 @@ public class MainActivity extends BaseMvpActivity<MainMvp.PM> implements MainMvp
 
     String[] sortNames = StreamSupport
       .stream(data.sortTypes())
-      .map(sortType -> sortType.reolveName(this))
+      .map(sortType -> sortType.resolveName(this))
       .toArray(String[]::new);
 
     String initSortName = sortNames[data.sortTypes().indexOf(data.initSortType())];

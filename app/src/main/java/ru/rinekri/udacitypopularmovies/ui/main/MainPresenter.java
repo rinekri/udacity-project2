@@ -58,8 +58,8 @@ public class MainPresenter extends BaseMvpPresenter<MainMvp.PM, MainMvp.View> {
   }
 
   private void loadViewContent(MovieSortType sortType) {
-    abortNetworkRequests();
-    elceNetworkRequestL(() -> interactor.getData(sortType));
+    abortAsyncRequests();
+    elceAsyncRequestL(() -> interactor.getData(sortType));
   }
 
   private void showInitContent(MovieSortType sortType) {

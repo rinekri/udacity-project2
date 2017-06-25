@@ -11,76 +11,91 @@ import java.util.List;
 import java8.util.function.Consumer;
 import java8.util.stream.StreamSupport;
 import ru.rinekri.udacitypopularmovies.ui.base.functions.UnsafeSupplier;
+import ru.rinekri.udacitypopularmovies.ui.base.models.AsyncRequestWrapper;
 import ru.rinekri.udacitypopularmovies.ui.base.models.ErrorConfig;
-import ru.rinekri.udacitypopularmovies.ui.base.models.NetworkRequestWrapper;
 import timber.log.Timber;
 
 abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpPresenter<V> {
-  protected List<AsyncTask> networkRequests = new ArrayList<>();
+  protected List<AsyncTask> asyncRequests = new ArrayList<>();
 
   @Override
   public void onDestroy() {
-    abortNetworkRequests();
+    abortAsyncRequests();
     super.onDestroy();
   }
 
-  protected void abortNetworkRequests() {
+  protected void abortAsyncRequests() {
     StreamSupport
-      .stream(networkRequests)
+      .stream(asyncRequests)
       .forEach((request) -> request.cancel(true));
-    networkRequests.clear();
+    asyncRequests.clear();
   }
 
-  protected void elceNetworkRequestL(UnsafeSupplier<D> onLoad) {
-    elceNetworkRequestLE(
+  /**
+   * @param onLoad load function
+   */
+  protected void elceAsyncRequestL(UnsafeSupplier<D> onLoad) {
+    elceAsyncRequestLE(
       onLoad,
       (error) -> getViewState().showError(ErrorConfig.createFrom(error))
     );
   }
 
-  protected void elceNetworkRequestLS(UnsafeSupplier<D> onLoad,
-                                      Consumer<D> onSuccess) {
-    networkRequest(
+  /**
+   * @param onLoad    load function
+   * @param onSuccess success function
+   */
+  protected void elceAsyncRequestLS(UnsafeSupplier<D> onLoad,
+                                    Consumer<D> onSuccess) {
+    elceAsyncRequest(
       () -> getViewState().showLoading(),
       onSuccess,
       onLoad,
       (error) -> getViewState().showError(ErrorConfig.createFrom(error)));
   }
 
-  protected void elceNetworkRequestLE(UnsafeSupplier<D> onLoad,
-                                      Consumer<Throwable> onError) {
-    networkRequest(
+  /**
+   * @param onLoad  load function
+   * @param onError error function
+   */
+  protected void elceAsyncRequestLE(UnsafeSupplier<D> onLoad,
+                                    Consumer<Throwable> onError) {
+    elceAsyncRequest(
       () -> getViewState().showLoading(),
       (result) -> getViewState().showViewContent(result),
       onLoad,
       onError);
   }
 
-  protected void networkRequest(Runnable onPrepare,
-                                Consumer<D> onSuccess,
-                                UnsafeSupplier<D> onLoad,
-                                Consumer<Throwable> onError) {
+  /**
+   * Base function to async request
+   */
+  @SuppressWarnings("unchecked")
+  protected void elceAsyncRequest(Runnable onPrepare,
+                                  Consumer<D> onSuccess,
+                                  UnsafeSupplier<D> onLoad,
+                                  Consumer<Throwable> onError) {
 
     AsyncTask request = new NetworkRequest(
       onPrepare,
       onSuccess,
-      () -> NetworkRequestWrapper.create(onLoad.get(), null),
+      () -> AsyncRequestWrapper.content(onLoad.get()),
       onError
     );
-    networkRequests.add(request);
+    asyncRequests.add(request);
     request.execute();
   }
 
-  public class NetworkRequest extends AsyncTask<Object, Void, NetworkRequestWrapper<D>> {
+  private class NetworkRequest extends AsyncTask<Object, Void, AsyncRequestWrapper<D>> {
     private Runnable onPrepare;
     private Consumer<D> onSuccess;
-    private UnsafeSupplier<NetworkRequestWrapper<D>> onLoad;
+    private UnsafeSupplier<AsyncRequestWrapper<D>> onLoad;
     private Consumer<Throwable> onError;
 
-    public NetworkRequest(Runnable onPrepare,
-                          Consumer<D> onSuccess,
-                          UnsafeSupplier<NetworkRequestWrapper<D>> onLoad,
-                          Consumer<Throwable> onError) {
+    NetworkRequest(Runnable onPrepare,
+                   Consumer<D> onSuccess,
+                   UnsafeSupplier<AsyncRequestWrapper<D>> onLoad,
+                   Consumer<Throwable> onError) {
       this.onPrepare = onPrepare;
       this.onLoad = onLoad;
       this.onSuccess = onSuccess;
@@ -94,17 +109,17 @@ abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpP
 
     @SuppressWarnings("unchecked")
     @Override
-    protected NetworkRequestWrapper<D> doInBackground(Object... params) {
+    protected AsyncRequestWrapper<D> doInBackground(Object... params) {
       try {
         return onLoad.get();
       } catch (Exception ex) {
-        return NetworkRequestWrapper.create(null, ex);
+        return AsyncRequestWrapper.error(ex);
       }
     }
 
     @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
     @Override
-    protected void onPostExecute(@NonNull NetworkRequestWrapper<D> result) {
+    protected void onPostExecute(@NonNull AsyncRequestWrapper<D> result) {
       if (result.data() != null) {
         onSuccess.accept(result.data());
       } else if (result.error() != null) {
