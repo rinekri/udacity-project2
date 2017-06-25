@@ -7,7 +7,7 @@ import com.arellomobile.mvp.InjectViewState;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpPresenter;
 
 @InjectViewState
-public class DetailsPresenter extends BaseMvpPresenter<DetailsPM, DetailsView> {
+public class DetailsPresenter extends BaseMvpPresenter<DetailsMvp.PM, DetailsMvp.View> {
   @NonNull
   private MovieShortInfo movieShortInfo;
 
@@ -18,6 +18,6 @@ public class DetailsPresenter extends BaseMvpPresenter<DetailsPM, DetailsView> {
   @Override
   protected void onFirstViewAttach() {
     super.onFirstViewAttach();
-    getViewState().showViewContent(new AutoValue_DetailsPM(movieShortInfo));
+    getViewState().showViewContent(DetailsMvp.PM.create(movieShortInfo));
   }
 }

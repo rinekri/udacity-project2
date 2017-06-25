@@ -9,7 +9,7 @@ import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.ui.base.models.MovieSortType;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 
-public class MainInputInteractor implements SyncInteractor<MovieSortType, MainPM> {
+public class MainInputInteractor implements SyncInteractor<MovieSortType, MainMvp.PM> {
 
   private MainServiceApi mMainServiceApi;
 
@@ -18,7 +18,7 @@ public class MainInputInteractor implements SyncInteractor<MovieSortType, MainPM
   }
 
   @Override
-  public MainPM getData(@NonNull MovieSortType type) throws Exception {
+  public MainMvp.PM getData(@NonNull MovieSortType type) throws Exception {
     List<MovieInfo> movies = null;
 
     switch (type) {
@@ -29,6 +29,6 @@ public class MainInputInteractor implements SyncInteractor<MovieSortType, MainPM
         movies = mMainServiceApi.getPopularMovies().execute().body().results();
         break;
     }
-    return MainPM.create(movies);
+    return MainMvp.PM.create(movies);
   }
 }

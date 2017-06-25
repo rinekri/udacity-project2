@@ -19,7 +19,7 @@ import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
 
 import static ru.rinekri.udacitypopularmovies.ui.UiConstants.BLUR_RADIUS;
 
-public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements DetailsView {
+public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements DetailsMvp.View {
   private static final String EXTRA_MOVIE_SHORT_INFO = BuildConfig.APPLICATION_ID + ".extra_short_info";
   private static final String EXTRA_TITLE = BuildConfig.APPLICATION_ID + ".extra_title";
 
@@ -64,7 +64,7 @@ public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements Detai
   }
 
   @Override
-  public void showViewContent(DetailsPM data) {
+  public void showViewContent(DetailsMvp.PM data) {
     super.showViewContent(data);
     Picasso
       .with(this)

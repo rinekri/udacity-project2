@@ -21,7 +21,7 @@ import ru.rinekri.udacitypopularmovies.ui.utils.DialogUtils;
 
 import static ru.rinekri.udacitypopularmovies.ui.UiConstants.GRID_COLUMNS;
 
-public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
+public class MainActivity extends BaseMvpActivity<MainMvp.PM> implements MainMvp.View {
 
   @BindView(R.id.content_container_view)
   RecyclerView contentView;
@@ -43,7 +43,7 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
   @Override
   protected void onStart() {
     super.onStart();
-    presenter.setRouter(new MainRouter(this, contentView));
+    presenter.setRouter(new MainMvp.Router(this, contentView));
   }
 
   @Override
@@ -65,7 +65,7 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
   }
 
   @Override
-  public void showInitContent(MainIM data) {
+  public void showInitContent(MainMvp.IM data) {
     toolbarTitle = (TextView) getLayoutInflater().inflate(R.layout.view_spinner, null);
     getToolbar().removeAllViews();
     getToolbar().addView(toolbarTitle);
@@ -96,7 +96,7 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
   }
 
   @Override
-  public void showViewContent(MainPM data) {
+  public void showViewContent(MainMvp.PM data) {
     super.showViewContent(data);
     contentAdapter.swapContent(data.movies());
   }

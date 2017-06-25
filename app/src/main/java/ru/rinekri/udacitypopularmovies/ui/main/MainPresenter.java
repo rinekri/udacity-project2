@@ -15,19 +15,19 @@ import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 import ru.rinekri.udacitypopularmovies.ui.details.MovieShortInfo;
 
 @InjectViewState
-public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
+public class MainPresenter extends BaseMvpPresenter<MainMvp.PM, MainMvp.View> {
   private static final List<MovieSortType> SORT_TYPES = Arrays.asList(MovieSortType.values());
   private static final MovieSortType INIT_SORT_TYPE = MovieSortType.Popular;
 
   @Nullable
-  private MainRouter router;
-  private SyncInteractor<MovieSortType, MainPM> interactor;
+  private MainMvp.Router router;
+  private SyncInteractor<MovieSortType, MainMvp.PM> interactor;
 
-  public MainPresenter(SyncInteractor<MovieSortType, MainPM> interactor) {
+  public MainPresenter(SyncInteractor<MovieSortType, MainMvp.PM> interactor) {
     this.interactor = interactor;
   }
 
-  void setRouter(@NonNull MainRouter router) {
+  void setRouter(@NonNull MainMvp.Router router) {
     this.router = router;
   }
 
@@ -63,6 +63,6 @@ public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
   }
 
   private void showInitContent(MovieSortType sortType) {
-    getViewState().showInitContent(MainIM.create(SORT_TYPES, sortType));
+    getViewState().showInitContent(MainMvp.IM.create(SORT_TYPES, sortType));
   }
 }
