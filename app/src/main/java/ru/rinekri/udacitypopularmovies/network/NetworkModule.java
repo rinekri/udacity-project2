@@ -19,7 +19,7 @@ import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.network.type_adapters.PosterPathAdapter;
 
 import static ru.rinekri.udacitypopularmovies.network.NetworkConstants.API_VERSION;
-import static ru.rinekri.udacitypopularmovies.network.NetworkConstants.DEFAULT_CONNECT_TIMEOUT;
+import static ru.rinekri.udacitypopularmovies.network.NetworkConstants.DEFAULT_CONNECT_TIMEOUT_MS;
 import static ru.rinekri.udacitypopularmovies.network.NetworkConstants.HTTP_LOG_LEVEL;
 
 @Module
@@ -28,8 +28,8 @@ public class NetworkModule {
   @ApplicationScope
   OkHttpClient provideOkHttp() {
     return new OkHttpClient.Builder()
-      .readTimeout(DEFAULT_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
-      .writeTimeout(DEFAULT_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
+      .readTimeout(DEFAULT_CONNECT_TIMEOUT_MS, TimeUnit.MILLISECONDS)
+      .writeTimeout(DEFAULT_CONNECT_TIMEOUT_MS, TimeUnit.MILLISECONDS)
       .addInterceptor(new ApiRequestInterceptor())
       .addInterceptor(new HttpLoggingInterceptor().setLevel(HTTP_LOG_LEVEL))
       .build();
