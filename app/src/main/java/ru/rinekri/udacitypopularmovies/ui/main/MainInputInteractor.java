@@ -11,10 +11,10 @@ import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 
 class MainInputInteractor implements SyncInteractor<MovieSortType, MainMvp.PM> {
 
-  private MainServiceApi mMainServiceApi;
+  private MainServiceApi mainServiceApi;
 
   MainInputInteractor(MainServiceApi mainServiceApi) {
-    mMainServiceApi = mainServiceApi;
+    this.mainServiceApi = mainServiceApi;
   }
 
   @Override
@@ -23,10 +23,10 @@ class MainInputInteractor implements SyncInteractor<MovieSortType, MainMvp.PM> {
 
     switch (type) {
       case TopRated:
-        movies = mMainServiceApi.getTopRatedMovies().execute().body().results();
+        movies = mainServiceApi.getTopRatedMovies().execute().body().results();
         break;
       case Popular:
-        movies = mMainServiceApi.getPopularMovies().execute().body().results();
+        movies = mainServiceApi.getPopularMovies().execute().body().results();
         break;
       case Favorites: {
         //TODO: Add logic to load favorites movies from db
