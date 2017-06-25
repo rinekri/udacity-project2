@@ -57,7 +57,7 @@ class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainViewHolde
       //TODO: Add error handling and placeholder showing
       Picasso
         .with(poster.getContext())
-        .load(item.posterUrlSmall())
+        .load(item.posterUrl())
         .placeholder(R.drawable.ic_main_placeholder)
         .into(poster);
 

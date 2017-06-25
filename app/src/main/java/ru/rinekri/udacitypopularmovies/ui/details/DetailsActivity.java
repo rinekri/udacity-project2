@@ -68,8 +68,7 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
     super.showViewContent(data);
     Picasso
       .with(this)
-      .load(data.movieInfo().posterPath())
-      .transform(new BlurTransformation(this, BLUR_RADIUS))
+      .load(data.movieInfo().backDropUrl())
       .into(moviePoster);
     voteAverage.setText(data.movieInfo().voteAverage());
     overview.setText(data.movieInfo().overview());

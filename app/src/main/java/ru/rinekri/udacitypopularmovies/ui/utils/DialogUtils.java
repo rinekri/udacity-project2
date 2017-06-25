@@ -13,7 +13,7 @@ import ru.rinekri.udacitypopularmovies.R;
 
 public class DialogUtils {
   public DialogUtils() {
-    throw new RuntimeException("Static class");
+    throw new RuntimeException("static class");
   }
 
   @SuppressWarnings("unchecked")

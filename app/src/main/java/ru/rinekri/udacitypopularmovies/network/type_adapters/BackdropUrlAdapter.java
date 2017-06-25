@@ -12,12 +12,12 @@ import timber.log.Timber;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-public class PosterUrlAdapter {
+public class BackdropUrlAdapter {
   @FromJson
   @Annotation
   String fromJson(String relativePath) {
-    String imageUrl = UrlUtils.contructImageUrl(NetworkConstants.POSTER_IMAGE_SIZE, relativePath);
-    Timber.e("Poster url: %s", imageUrl);
+    String imageUrl = UrlUtils.contructImageUrl(NetworkConstants.BACKDROP_IMAGE_SIZE, relativePath);
+    Timber.e("Backdrop url: %s", imageUrl);
     return imageUrl;
   }
 
