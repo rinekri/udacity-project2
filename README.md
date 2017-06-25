@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Mahtalitet/udacity-project1.svg?branch=master)](https://travis-ci.org/Mahtalitet/udacity-project1)
+[![Build Status](https://travis-ci.org/Mahtalitet/udacity-project2.svg?branch=master)](https://travis-ci.org/Mahtalitet/udacity-project1)
 
 ![Udacity logo](https://www.kartikarora.me/img/blog/nanodegree/andnano.jpeg)
 
