@@ -11,6 +11,7 @@ ext {
   def daggerVersion = '2.8'
   def streamBackportVersion = '1.5.4'
   def constraintVersion = '1.0.2'
+  def epoxyVersion = '2.2.0'
 
   coreDepends = [
     "com.squareup.retrofit2:retrofit:$retrofitVersion",
@@ -31,7 +32,8 @@ ext {
     'com.makeramen:roundedimageview:2.3.0',
     "com.jakewharton:butterknife:$butterKnifeVersion",
     "com.arello-mobile:moxy-app-compat:$moxyVersion",
-    'jp.wasabeef:picasso-transformations:2.1.2'
+    'jp.wasabeef:picasso-transformations:2.1.2',
+    "com.airbnb.android:epoxy:$epoxyVersion"
   ]
 
   aptDepends = [
@@ -39,7 +41,8 @@ ext {
     "com.google.auto.value:auto-value:$autoValueVersion",
     "com.ryanharter.auto.value:auto-value-parcel:$autoParselVersion",
     "com.google.dagger:dagger-compiler:$daggerVersion",
-    "com.arello-mobile:moxy-compiler:$moxyVersion"
+    "com.arello-mobile:moxy-compiler:$moxyVersion",
+    "com.airbnb.android:epoxy-processor:$epoxyVersion"
   ]
 
   providedDepends = [
