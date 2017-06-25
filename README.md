@@ -37,6 +37,10 @@ Use Service's | Plan
 Use BroadcastReceiver's | Plan
 Use JobDispatcher (or alternative) | Plan
 Use push notifications | Plan
+Use ContentProvider/Resolver | Plan
+Use SharedPreferences | Plan
+Use AsynkTaskLoader | Plan
+Use PreferenceFragment | Plan
 
 ## Libs, plugins, extensions
 Retrofit</br>
