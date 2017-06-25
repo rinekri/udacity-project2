@@ -9,11 +9,11 @@ import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.ui.base.models.MovieSortType;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 
-public class MainInputInteractor implements SyncInteractor<MovieSortType, MainMvp.PM> {
+class MainInputInteractor implements SyncInteractor<MovieSortType, MainMvp.PM> {
 
   private MainServiceApi mMainServiceApi;
 
-  public MainInputInteractor(MainServiceApi mainServiceApi) {
+  MainInputInteractor(MainServiceApi mainServiceApi) {
     mMainServiceApi = mainServiceApi;
   }
 
@@ -28,6 +28,10 @@ public class MainInputInteractor implements SyncInteractor<MovieSortType, MainMv
       case Popular:
         movies = mMainServiceApi.getPopularMovies().execute().body().results();
         break;
+      case Favorites: {
+        //TODO: Add logic to load favorites movies from db
+        break;
+      }
     }
     return MainMvp.PM.create(movies);
   }

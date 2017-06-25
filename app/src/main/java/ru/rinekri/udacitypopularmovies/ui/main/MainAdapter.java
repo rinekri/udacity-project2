@@ -2,6 +2,7 @@ package ru.rinekri.udacitypopularmovies.ui.main;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -14,25 +15,27 @@ import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 import ru.rinekri.udacitypopularmovies.ui.base.recycler_view.BaseSimpleAdapter;
 import ru.rinekri.udacitypopularmovies.ui.base.recycler_view.BaseViewHolder;
 
-public class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainViewHolder> {
+class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainViewHolder> {
+  @Nullable
   private Consumer<MovieInfo> onPosterClickAction;
+  @Nullable
   private Consumer<MovieInfo> onPosterLongClickAction;
 
-  public MainAdapter(@LayoutRes Integer itemLayoutRes,
-                     @NonNull Consumer<MovieInfo> onPosterClickAction,
-                     @NonNull Consumer<MovieInfo> onPosterLongClickAction) {
+  MainAdapter(@LayoutRes Integer itemLayoutRes,
+              @NonNull Consumer<MovieInfo> onPosterClickAction,
+              @NonNull Consumer<MovieInfo> onPosterLongClickAction) {
     super(itemLayoutRes);
     this.onPosterClickAction = onPosterClickAction;
     this.onPosterLongClickAction = onPosterLongClickAction;
   }
 
-  public MainAdapter(@LayoutRes Integer itemLayoutRes,
-                     @NonNull Consumer<MovieInfo> onPosterClickAction) {
+  MainAdapter(@LayoutRes Integer itemLayoutRes,
+              @NonNull Consumer<MovieInfo> onPosterClickAction) {
     super(itemLayoutRes);
     this.onPosterClickAction = onPosterClickAction;
   }
 
-  public MainAdapter(@LayoutRes Integer itemLayoutRes) {
+  MainAdapter(@LayoutRes Integer itemLayoutRes) {
     super(itemLayoutRes);
   }
 
@@ -41,11 +44,11 @@ public class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainVi
     return new MainViewHolder(itemView);
   }
 
-  public class MainViewHolder extends BaseViewHolder<MovieInfo> {
+  class MainViewHolder extends BaseViewHolder<MovieInfo> {
     @BindView(R.id.movie_poster)
     ImageView poster;
 
-    public MainViewHolder(View itemView) {
+    MainViewHolder(View itemView) {
       super(itemView);
     }
 
@@ -54,7 +57,7 @@ public class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainVi
       //TODO: Add error handling and placeholder showing
       Picasso
         .with(poster.getContext())
-        .load(item.posterPath())
+        .load(item.posterUrlSmall())
         .placeholder(R.drawable.ic_main_placeholder)
         .into(poster);
 
@@ -66,8 +69,9 @@ public class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainVi
       itemView.setOnLongClickListener(view -> {
         if (MainAdapter.this.onPosterLongClickAction != null) {
           onPosterLongClickAction.accept(item);
+          return true;
         }
-        return true;
+        return false;
       });
     }
   }

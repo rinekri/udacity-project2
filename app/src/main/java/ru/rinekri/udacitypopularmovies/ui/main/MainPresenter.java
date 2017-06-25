@@ -23,7 +23,7 @@ public class MainPresenter extends BaseMvpPresenter<MainMvp.PM, MainMvp.View> {
   private MainMvp.Router router;
   private SyncInteractor<MovieSortType, MainMvp.PM> interactor;
 
-  public MainPresenter(SyncInteractor<MovieSortType, MainMvp.PM> interactor) {
+  MainPresenter(SyncInteractor<MovieSortType, MainMvp.PM> interactor) {
     this.interactor = interactor;
   }
 
@@ -44,15 +44,15 @@ public class MainPresenter extends BaseMvpPresenter<MainMvp.PM, MainMvp.View> {
     super.onDestroy();
   }
 
-  public void onMoviePosterClicked(MovieInfo movieInfo) {
+  void onMoviePosterClicked(MovieInfo movieInfo) {
     router.showDetailInfo(MovieShortInfo.from(movieInfo));
   }
 
-  public void onMoviePosterLongClicked(MovieInfo movieInfo) {
+  void onMoviePosterLongClicked(MovieInfo movieInfo) {
     router.showMessage(movieInfo.originalTitle());
   }
 
-  public void onMovieSortChanged(MovieSortType sortType) {
+  void onMovieSortChanged(MovieSortType sortType) {
     showInitContent(sortType);
     loadViewContent(sortType);
   }

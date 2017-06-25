@@ -12,11 +12,11 @@ import timber.log.Timber;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-public class PosterPathAdapter {
+public class PosterUrlAdapter {
   private static final String IMAGE_SIZE = "w185";
 
   @FromJson
-  @PosterPath
+  @Annotation
   String fromJson(String relativePath) {
     HttpUrl parametrizedBaseUrl = HttpUrl
       .parse(BuildConfig.IMAGE_STORE_BASE_URL)
@@ -31,12 +31,12 @@ public class PosterPathAdapter {
   }
 
   @ToJson
-  String toJson(@PosterPath String absolutePath) {
+  String toJson(@Annotation String absolutePath) {
     return absolutePath;
   }
 
   @Retention(RUNTIME)
   @JsonQualifier
-  public @interface PosterPath {
+  public @interface Annotation {
   }
 }

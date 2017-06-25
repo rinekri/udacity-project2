@@ -9,14 +9,14 @@ import com.squareup.moshi.Moshi;
 
 import java.util.List;
 
-import ru.rinekri.udacitypopularmovies.network.type_adapters.PosterPathAdapter;
+import ru.rinekri.udacitypopularmovies.network.type_adapters.PosterUrlAdapter;
 
 @AutoValue
 public abstract class MovieInfo implements Parcelable {
   public abstract Long id();
   @Json(name = "poster_path")
-  @PosterPathAdapter.PosterPath
-  public abstract String posterPath();
+  @PosterUrlAdapter.Annotation
+  public abstract String posterUrlSmall();
   public abstract Boolean adult();
   public abstract String overview();
   @Json(name = "release_date")

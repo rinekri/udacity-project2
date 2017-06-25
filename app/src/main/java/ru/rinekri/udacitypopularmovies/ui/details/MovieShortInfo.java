@@ -6,12 +6,12 @@ import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 
 import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
-import ru.rinekri.udacitypopularmovies.network.type_adapters.PosterPathAdapter;
+import ru.rinekri.udacitypopularmovies.network.type_adapters.PosterUrlAdapter;
 
 @AutoValue
 public abstract class MovieShortInfo implements Parcelable {
   @Json(name = "poster_path")
-  @PosterPathAdapter.PosterPath
+  @PosterUrlAdapter.Annotation
   public abstract String posterPath();
   public abstract String overview();
   @Json(name = "release_date")
@@ -23,7 +23,7 @@ public abstract class MovieShortInfo implements Parcelable {
 
   public static MovieShortInfo from(MovieInfo movieInfo) {
     return new AutoValue_MovieShortInfo(
-      movieInfo.posterPath(),
+      movieInfo.posterUrlSmall(),
       movieInfo.overview(),
       movieInfo.releaseDate(),
       movieInfo.title(),
