@@ -15,7 +15,7 @@ public abstract class ResponseGetReviews {
   public abstract int totalPages();
   @Json(name = "total_results")
   public abstract int totalResults();
-  public abstract List<MovieVideo> results();
+  public abstract List<MovieReview> results();
 
   public static JsonAdapter<ResponseGetReviews> jsonAdapter(Moshi moshi) {
     return new AutoValue_ResponseGetReviews.MoshiJsonAdapter(moshi);

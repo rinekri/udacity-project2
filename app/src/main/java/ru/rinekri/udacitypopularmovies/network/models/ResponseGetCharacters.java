@@ -8,12 +8,12 @@ import com.squareup.moshi.Moshi;
 import java.util.List;
 
 @AutoValue
-public abstract class ResponseGetTitles {
+public abstract class ResponseGetCharacters {
   public abstract String id();
-  @Json(name = "titles")
-  public abstract List<MovieTitle> results();
+  @Json(name = "cast")
+  public abstract List<MovieCharacter> results();
 
-  public static JsonAdapter<ResponseGetTitles> jsonAdapter(Moshi moshi) {
-    return new AutoValue_ResponseGetTitles.MoshiJsonAdapter(moshi);
+  public static JsonAdapter<ResponseGetCharacters> jsonAdapter(Moshi moshi) {
+    return new AutoValue_ResponseGetCharacters.MoshiJsonAdapter(moshi);
   }
 }

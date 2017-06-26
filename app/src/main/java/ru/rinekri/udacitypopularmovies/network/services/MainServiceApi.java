@@ -3,6 +3,7 @@ package ru.rinekri.udacitypopularmovies.network.services;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import ru.rinekri.udacitypopularmovies.network.models.ResponseGetCharacters;
 import ru.rinekri.udacitypopularmovies.network.models.ResponseGetMovies;
 import ru.rinekri.udacitypopularmovies.network.models.ResponseGetReviews;
 import ru.rinekri.udacitypopularmovies.network.models.ResponseGetTitles;
@@ -23,4 +24,7 @@ public interface MainServiceApi {
 
   @GET("movie/{movie_id}/alternative_titles")
   Call<ResponseGetTitles> getMovieTitles(@Path("movie_id") String movieId);
+
+  @GET("movie/{movie_id}/credits")
+  Call<ResponseGetCharacters> getMovieCharacters(@Path("movie_id") String movieId);
 }
