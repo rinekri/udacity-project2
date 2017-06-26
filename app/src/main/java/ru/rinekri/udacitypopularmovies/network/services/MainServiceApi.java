@@ -4,6 +4,8 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import ru.rinekri.udacitypopularmovies.network.models.ResponseGetMovies;
+import ru.rinekri.udacitypopularmovies.network.models.ResponseGetReviews;
+import ru.rinekri.udacitypopularmovies.network.models.ResponseGetTitles;
 import ru.rinekri.udacitypopularmovies.network.models.ResponseGetVideos;
 
 public interface MainServiceApi {
@@ -17,5 +19,8 @@ public interface MainServiceApi {
   Call<ResponseGetVideos> getMovieVideos(@Path("movie_id") String movieId);
 
   @GET("movie/{movie_id}/reviews")
-  Call<ResponseGetMovies> getMovieReviews(@Path("movie_id") String movieId);
+  Call<ResponseGetReviews> getMovieReviews(@Path("movie_id") String movieId);
+
+  @GET("movie/{movie_id}/alternative_titles")
+  Call<ResponseGetTitles> getMovieTitles(@Path("movie_id") String movieId);
 }
