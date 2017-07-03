@@ -35,7 +35,8 @@ public abstract class MovieInfo implements Parcelable {
   public abstract String popularity();
   @Json(name = "vote_count")
   public abstract String voteCount();
-  public abstract Boolean video();
+  @Json(name = "video")
+  public abstract Boolean hasVideo();
   @Json(name = "vote_average")
   public abstract String voteAverage();
 

@@ -3,7 +3,7 @@ package ru.rinekri.udacitypopularmovies.ui.utils;
 import okhttp3.HttpUrl;
 import ru.rinekri.udacitypopularmovies.BuildConfig;
 
-public class UrlUtils {
+public final class UrlUtils {
   public UrlUtils() {
     throw new RuntimeException("static class");
   }

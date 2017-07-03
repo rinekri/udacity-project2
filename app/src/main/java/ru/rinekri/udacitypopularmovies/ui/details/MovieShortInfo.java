@@ -8,6 +8,7 @@ import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 
 @AutoValue
 public abstract class MovieShortInfo implements Parcelable {
+  public abstract String id();
   public abstract String posterUrl();
   public abstract String backDropUrl();
   public abstract String overview();
@@ -17,6 +18,7 @@ public abstract class MovieShortInfo implements Parcelable {
 
   public static MovieShortInfo from(MovieInfo movieInfo) {
     return new AutoValue_MovieShortInfo(
+      movieInfo.id(),
       movieInfo.posterUrl(),
       movieInfo.backdropUrl(),
       movieInfo.overview(),

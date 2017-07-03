@@ -3,7 +3,7 @@ package ru.rinekri.udacitypopularmovies.ui.utils;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
-public class ViewUtils {
+public final class ViewUtils {
   public ViewUtils() {
     throw new RuntimeException("Static class");
   }

@@ -33,7 +33,7 @@ public interface MainServiceApi {
   Call<ResponseGetKeywords> getMovieKeywords(@Path("movie_id") String movieId);
 
   @GET("movie/{movie_id}/recommendations")
-  Call<ResponseGetMovies> getMovieRecomendations(@Path("movie_id") String movieId);
+  Call<ResponseGetMovies> getRecommendedMovies(@Path("movie_id") String movieId);
 
   @GET("movie/{movie_id}/similar")
   Call<ResponseGetMovies> getSimilarMovies(@Path("movie_id") String movieId);

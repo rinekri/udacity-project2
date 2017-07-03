@@ -13,6 +13,7 @@ import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpPresenter;
 import ru.rinekri.udacitypopularmovies.ui.base.models.MovieSortType;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 import ru.rinekri.udacitypopularmovies.ui.details.MovieShortInfo;
+import ru.rinekri.udacitypopularmovies.ui.utils.LangUtils;
 
 @InjectViewState
 public class MainPresenter extends BaseMvpPresenter<MainMvp.PM, MainMvp.View> {
@@ -39,17 +40,17 @@ public class MainPresenter extends BaseMvpPresenter<MainMvp.PM, MainMvp.View> {
   }
 
   @Override
-  public void onDestroy() {
-    router = null;
-    super.onDestroy();
+  public void destroyView(MainMvp.View view) {
+    this.router = null;
+    super.destroyView(view);
   }
 
   void onMoviePosterClicked(MovieInfo movieInfo) {
-    router.showDetailInfo(MovieShortInfo.from(movieInfo));
+    LangUtils.safeInvokeOrThrow(router, r -> r.showDetailInfo(MovieShortInfo.from(movieInfo)));
   }
 
   void onMoviePosterLongClicked(MovieInfo movieInfo) {
-    router.showMessage(movieInfo.originalTitle());
+    LangUtils.safeInvokeOrThrow(router, r -> r.showMessage(movieInfo.originalTitle()));
   }
 
   void onMovieSortChanged(MovieSortType sortType) {
