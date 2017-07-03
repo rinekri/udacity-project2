@@ -1,6 +1,7 @@
 package ru.rinekri.udacitypopularmovies.ui.details;
 
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 
@@ -10,6 +11,7 @@ import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 public abstract class MovieShortInfo implements Parcelable {
   public abstract String id();
   public abstract String posterUrl();
+  @Nullable
   public abstract String backDropUrl();
   public abstract String overview();
   public abstract String releaseDate();

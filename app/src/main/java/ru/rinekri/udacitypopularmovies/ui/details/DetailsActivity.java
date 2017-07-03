@@ -79,6 +79,7 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
       .load(data.movieInfo().backDropUrl())
       .into(moviePoster);
     //TODO: Fix bug when view doesn't correctly inflate at second start
+    // (maybe, because of Second scrollView)
     voteAverage.setText(data.movieInfo().voteAverage());
     overview.setText(data.movieInfo().overview());
     releaseDate.setText(data.movieInfo().releaseDate());

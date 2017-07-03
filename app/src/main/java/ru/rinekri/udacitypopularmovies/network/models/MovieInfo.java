@@ -1,6 +1,7 @@
 package ru.rinekri.udacitypopularmovies.network.models;
 
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
@@ -31,6 +32,7 @@ public abstract class MovieInfo implements Parcelable {
   public abstract String originalLanguage();
   @Json(name = "backdrop_path")
   @BackdropUrlAdapter.Annotation
+  @Nullable
   public abstract String backdropUrl();
   public abstract String popularity();
   @Json(name = "vote_count")
