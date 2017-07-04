@@ -60,10 +60,6 @@ ext {
 
   streamsBackportDepends = [
     "net.sourceforge.streamsupport:streamsupport:$streamBackportVersion"
-//    "net.sourceforge.streamsupport:streamsupport-cfuture:$streamBackportVersion",
-//    "net.sourceforge.streamsupport:streamsupport-atomic:$streamBackportVersion",
-//    "net.sourceforge.streamsupport:streamsupport-flow:$streamBackportVersion",
-//    "net.sourceforge.streamsupport:streamsupport-literal:$streamBackportVersion"
   ]
 
   leakCanary = "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
