@@ -33,16 +33,17 @@ ext {
     "com.jakewharton:butterknife:$butterKnifeVersion",
     "com.arello-mobile:moxy-app-compat:$moxyVersion",
     'jp.wasabeef:picasso-transformations:2.1.2',
-    "com.airbnb.android:epoxy:$epoxyVersion"
+//    "com.airbnb.android:epoxy:$epoxyVersion"
   ]
 
   aptDepends = [
+    'com.squareup:javapoet:1.8.0',
     "com.jakewharton:butterknife-compiler:$butterKnifeVersion",
     "com.google.auto.value:auto-value:$autoValueVersion",
     "com.ryanharter.auto.value:auto-value-parcel:$autoParselVersion",
     "com.google.dagger:dagger-compiler:$daggerVersion",
     "com.arello-mobile:moxy-compiler:$moxyVersion",
-    "com.airbnb.android:epoxy-processor:$epoxyVersion"
+//    "com.airbnb.android:epoxy-processor:$epoxyVersion"
   ]
 
   providedDepends = [
