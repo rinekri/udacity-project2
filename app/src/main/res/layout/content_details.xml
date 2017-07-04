@@ -10,118 +10,119 @@
     <include layout="@layout/appbar_collapsing"/>
 
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/content_container_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <android.support.v7.widget.CardView
+            <include
+                android:id="@+id/elce_container"
+                layout="@layout/elce_details"/>
+
+            <LinearLayout
+                android:id="@+id/content_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/details_default_card_margin"
-                app:cardElevation="@dimen/details_default_card_elevation"
-                android:layout_marginEnd="@dimen/details_default_card_margin"
-                android:layout_marginTop="@dimen/details_default_card_margin">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/base_padding">
+                    android:layout_marginEnd="@dimen/details_default_card_margin"
+                    android:layout_marginStart="@dimen/details_default_card_margin"
+                    android:layout_marginTop="@dimen/details_default_card_margin"
+                    app:cardElevation="@dimen/details_default_card_elevation">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:text="@string/details_vote_average"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
-
-                    <TextView
-                        android:id="@+id/details_vote_average"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="Message"/>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/details_default_card_margin"
-                android:layout_marginEnd="@dimen/details_default_card_margin"
-                app:cardElevation="@dimen/details_default_card_elevation"
-                android:layout_marginTop="@dimen/details_default_card_margin">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/base_padding">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:text="@string/details_release_date"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
-
-                    <TextView
-                        android:id="@+id/details_release_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="Message"/>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="@dimen/details_default_card_elevation"
-                android:layout_margin="@dimen/details_default_card_margin">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/base_padding">
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/details_overview"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/base_padding">
 
-                    <TextView
-                        android:id="@+id/details_overview"
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="@string/details_vote_average"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+                        <TextView
+                            android:id="@+id/details_vote_average"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Message"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/details_default_card_margin"
+                    android:layout_marginStart="@dimen/details_default_card_margin"
+                    android:layout_marginTop="@dimen/details_default_card_margin"
+                    app:cardElevation="@dimen/details_default_card_elevation">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:text="Message"/>
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/base_padding">
 
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="@string/details_release_date"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+                        <TextView
+                            android:id="@+id/details_release_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Message"/>
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/elce_scroll_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <include layout="@layout/elce_details"/>
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/details_default_card_margin"
+                    app:cardElevation="@dimen/details_default_card_elevation">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/base_padding">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/details_overview"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+                        <TextView
+                            android:id="@+id/details_overview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:text="Message"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+        </FrameLayout>
     </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -43,7 +43,7 @@ public abstract class ActivityConfig {
       .elceEmptyViewId(R.id.elce_empty_view)
       .elceErrorViewId(R.id.elce_error_view)
       .elceProgressViewId(R.id.elce_progress_view)
-      .contentContainerId(R.id.content_container_view)
+      .contentContainerId(R.id.content_container)
       .alignElceCenter(true)
       .useBackButton(false);
   }
