@@ -10,6 +10,7 @@ import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 @AutoValue
 public abstract class MovieShortInfo implements Parcelable {
   public abstract String id();
+  @Nullable
   public abstract String posterUrl();
   @Nullable
   public abstract String backDropUrl();

@@ -16,6 +16,7 @@ import ru.rinekri.udacitypopularmovies.network.type_adapters.PosterUrlAdapter;
 @AutoValue
 public abstract class MovieInfo implements Parcelable {
   public abstract String id();
+  @Nullable
   @Json(name = "poster_path")
   @PosterUrlAdapter.Annotation
   public abstract String posterUrl();
@@ -30,9 +31,9 @@ public abstract class MovieInfo implements Parcelable {
   public abstract String title();
   @Json(name = "original_language")
   public abstract String originalLanguage();
+  @Nullable
   @Json(name = "backdrop_path")
   @BackdropUrlAdapter.Annotation
-  @Nullable
   public abstract String backdropUrl();
   public abstract String popularity();
   @Json(name = "vote_count")
