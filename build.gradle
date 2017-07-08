@@ -4,9 +4,9 @@ buildscript {
   ext {
     targetSdkVersion = 25
     minSdkVersion = 19
-    buildToolsVersion = '25.0.2'
+    buildToolsVersion = '26.0.0'
     appName = 'UdacityPopularMovies'
-    androidToolsGradleVersion = '2.3.2'
+    androidToolsGradleVersion = '2.3.3'
   }
 
   repositories {
@@ -34,6 +34,9 @@ allprojects {
     }
     maven {
       url "https://clojars.org/repo/"
+    }
+    maven {
+      url "https://maven.google.com"
     }
   }
 }

@@ -1,5 +1,5 @@
 ext {
-  def supportLibVersion = '25.1.0'
+  def supportLibVersion = '25.4.0'
   def retrofitVersion = '2.2.0'
   def moxyVersion = '1.4.5'
   def okhttpVersion = '3.4.2'
@@ -11,7 +11,7 @@ ext {
   def daggerVersion = '2.11'
   def streamBackportVersion = '1.5.4'
   def constraintVersion = '1.0.2'
-  def epoxyVersion = '2.1.0'
+  def epoxyVersion = '2.2.0'
 
   coreDepends = [
     "com.squareup.retrofit2:retrofit:$retrofitVersion",
