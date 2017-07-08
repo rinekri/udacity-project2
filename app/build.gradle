@@ -11,7 +11,7 @@ retrolambda {
 configurations.all {
   resolutionStrategy {
     force 'com.squareup:javapoet:1.8.0'
-    force 'com.google.guava:guava:22.0'
+    force 'com.google.guava:guava:22.0-android'
   }
 }
 
