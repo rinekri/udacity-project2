@@ -38,7 +38,6 @@ ext {
   ]
 
   aptDepends = [
-    'com.squareup:javapoet:1.8.0',
     "com.jakewharton:butterknife-compiler:$butterKnifeVersion",
     "com.google.auto.value:auto-value:$autoValueVersion",
     "com.ryanharter.auto.value:auto-value-parcel:$autoParselVersion",
