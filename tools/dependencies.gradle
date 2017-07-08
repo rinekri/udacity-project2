@@ -8,7 +8,7 @@ ext {
   def autoValueVersion = '1.2'
   def autoValueMoshiAdapterVersion = '0.4.3'
   def autoParselVersion = '0.2.5'
-  def daggerVersion = '2.8'
+  def daggerVersion = '2.11'
   def streamBackportVersion = '1.5.4'
   def constraintVersion = '1.0.2'
   def epoxyVersion = '2.2.0'
