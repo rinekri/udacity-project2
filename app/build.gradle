@@ -10,8 +10,8 @@ retrolambda {
 
 configurations.all {
   resolutionStrategy {
-    force 'com.squareup:javapoet:1.8.0'
-    force 'com.google.guava:guava:22.0-android'
+    force rootProject.ext.javaPoet
+    force rootProject.ext.guava
   }
 }
 
@@ -72,7 +72,7 @@ dependencies {
   compile rootProject.ext.supportLibDepends
   compile rootProject.ext.otherDepends
   compile rootProject.ext.streamsBackportDepends
-  annotationProcessor 'com.squareup:javapoet:1.8.0'
+  annotationProcessor rootProject.ext.javaPoet
   annotationProcessor rootProject.ext.aptDepends
   provided rootProject.ext.providedDepends
 
