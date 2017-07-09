@@ -1,5 +1,5 @@
 ext {
-  def supportLibVersion = '25.1.0'
+  def supportLibVersion = '25.4.0'
   def retrofitVersion = '2.2.0'
   def moxyVersion = '1.4.5'
   def okhttpVersion = '3.4.2'
@@ -8,7 +8,7 @@ ext {
   def autoValueVersion = '1.2'
   def autoValueMoshiAdapterVersion = '0.4.3'
   def autoParselVersion = '0.2.5'
-  def daggerVersion = '2.8'
+  def daggerVersion = '2.11'
   def streamBackportVersion = '1.5.4'
   def constraintVersion = '1.0.2'
   def epoxyVersion = '2.2.0'
@@ -33,17 +33,18 @@ ext {
     "com.jakewharton:butterknife:$butterKnifeVersion",
     "com.arello-mobile:moxy-app-compat:$moxyVersion",
     'jp.wasabeef:picasso-transformations:2.1.2',
-//    "com.airbnb.android:epoxy:$epoxyVersion"
+    "com.airbnb.android:epoxy:$epoxyVersion",
+    "com.airbnb.android:epoxy-databinding:$epoxyVersion"
   ]
 
   aptDepends = [
-    'com.squareup:javapoet:1.8.0',
     "com.jakewharton:butterknife-compiler:$butterKnifeVersion",
     "com.google.auto.value:auto-value:$autoValueVersion",
     "com.ryanharter.auto.value:auto-value-parcel:$autoParselVersion",
     "com.google.dagger:dagger-compiler:$daggerVersion",
     "com.arello-mobile:moxy-compiler:$moxyVersion",
-//    "com.airbnb.android:epoxy-processor:$epoxyVersion"
+    "com.airbnb.android:epoxy-processor:$epoxyVersion",
+    "com.android.databinding:compiler:$androidToolsGradleVersion"
   ]
 
   providedDepends = [
@@ -65,4 +66,6 @@ ext {
 
   leakCanary = "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
   leakCanaryNoOp = "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+  javaPoet = 'com.squareup:javapoet:1.8.0'
+  guava = 'com.google.guava:guava:22.0-android'
 }

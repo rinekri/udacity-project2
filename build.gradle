@@ -4,8 +4,9 @@ buildscript {
   ext {
     targetSdkVersion = 25
     minSdkVersion = 19
-    buildToolsVersion = '25.0.2'
+    buildToolsVersion = '26.0.0'
     appName = 'UdacityPopularMovies'
+    androidToolsGradleVersion = '2.3.3'
   }
 
   repositories {
@@ -13,7 +14,7 @@ buildscript {
     maven { url 'https://jitpack.io' }
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:2.3.2'
+    classpath "com.android.tools.build:gradle:$androidToolsGradleVersion"
     classpath 'me.tatarka:gradle-retrolambda:3.6.1'
 
     // NOTE: Do not place your application dependencies here; they belong
@@ -33,6 +34,9 @@ allprojects {
     }
     maven {
       url "https://clojars.org/repo/"
+    }
+    maven {
+      url "https://maven.google.com"
     }
   }
 }

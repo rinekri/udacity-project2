@@ -8,6 +8,13 @@ retrolambda {
   jvmArgs '-noverify'
 }
 
+configurations.all {
+  resolutionStrategy {
+    force rootProject.ext.javaPoet
+    force rootProject.ext.guava
+  }
+}
+
 android {
   compileSdkVersion rootProject.ext.targetSdkVersion
   buildToolsVersion rootProject.ext.buildToolsVersion
@@ -53,6 +60,10 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
+
+  dataBinding {
+    enabled = true
+  }
 }
 
 dependencies {
@@ -61,6 +72,7 @@ dependencies {
   compile rootProject.ext.supportLibDepends
   compile rootProject.ext.otherDepends
   compile rootProject.ext.streamsBackportDepends
+  annotationProcessor rootProject.ext.javaPoet
   annotationProcessor rootProject.ext.aptDepends
   provided rootProject.ext.providedDepends
 
