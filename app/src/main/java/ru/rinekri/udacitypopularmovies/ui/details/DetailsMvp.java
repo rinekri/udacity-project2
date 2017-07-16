@@ -9,6 +9,7 @@ import java.util.List;
 
 import ru.rinekri.udacitypopularmovies.network.models.MovieCharacter;
 import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
+import ru.rinekri.udacitypopularmovies.network.models.MovieKeyword;
 import ru.rinekri.udacitypopularmovies.network.models.MovieReview;
 import ru.rinekri.udacitypopularmovies.network.models.MovieTitle;
 import ru.rinekri.udacitypopularmovies.network.models.MovieVideo;
@@ -30,6 +31,7 @@ class DetailsMvp {
     abstract List<MovieCharacter> movieCharacters();
     abstract List<MovieInfo> recommendedMovies();
     abstract List<MovieInfo> similarMovies();
+    abstract List<MovieKeyword> keywords();
 
     public static PM create(@NonNull MovieShortInfo movieShortInfo,
                             @NonNull List<MovieVideo> movieVideos,
@@ -37,7 +39,8 @@ class DetailsMvp {
                             @NonNull List<MovieTitle> movieTitles,
                             @NonNull List<MovieCharacter> movieCharacters,
                             @NonNull List<MovieInfo> recommendedMovies,
-                            @NonNull List<MovieInfo> similarMovies) {
+                            @NonNull List<MovieInfo> similarMovies,
+                            @NonNull List<MovieKeyword> keywords) {
       return new AutoValue_DetailsMvp_PM(
         movieShortInfo,
         movieVideos,
@@ -45,7 +48,8 @@ class DetailsMvp {
         movieTitles,
         movieCharacters,
         recommendedMovies,
-        similarMovies);
+        similarMovies,
+        keywords);
     }
   }
 }

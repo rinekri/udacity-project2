@@ -13,7 +13,7 @@ public abstract class MovieVideo {
   @Json(name = "name")
   public abstract String name();
   @Json(name = "site")
-  public abstract String service();
+  public abstract String hostingUrl();
 
   public static JsonAdapter<MovieVideo> jsonAdapter(Moshi moshi) {
     return new AutoValue_MovieVideo.MoshiJsonAdapter(moshi);

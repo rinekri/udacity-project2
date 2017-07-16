@@ -12,13 +12,17 @@ import java8.util.stream.Collectors;
 import java8.util.stream.StreamSupport;
 import ru.rinekri.udacitypopularmovies.ItemDetailsMovieInfoBindingModel_;
 import ru.rinekri.udacitypopularmovies.ItemDetailsTitleBindingModel_;
+import ru.rinekri.udacitypopularmovies.network.models.MovieVideo;
 import ru.rinekri.udacitypopularmovies.ui.base.data_binding.RecyclerModel_;
 import ru.rinekri.udacitypopularmovies.ui.utils.LangUtils;
+
+import static ru.rinekri.udacitypopularmovies.ui.UiConstants.VIDEO_YOUTUBE;
 
 class DetailsContentController extends TypedEpoxyController<DetailsMvp.PM> {
 
   public interface Actions {
     void onTitleClickedAction(String fullTitle);
+    void onVideoClickedAction(MovieVideo video);
   }
 
   @AutoModel
@@ -41,12 +45,6 @@ class DetailsContentController extends TypedEpoxyController<DetailsMvp.PM> {
 
   @Override
   protected void buildModels(DetailsMvp.PM data) {
-    model
-      .voteAverage(data.movieInfo().voteAverage())
-      .overview(data.movieInfo().overview())
-      .releaseDate(data.movieInfo().releaseDate())
-      .addTo(this);
-
     List<ItemDetailsTitleBindingModel_> titleModels = StreamSupport
       .stream(data.movieTitles())
       .map(titleModel -> {
@@ -58,6 +56,32 @@ class DetailsContentController extends TypedEpoxyController<DetailsMvp.PM> {
       })
       .collect(Collectors.toList());
 
-    add(new RecyclerModel_().id(View.generateViewId()).models(titleModels));
+    new RecyclerModel_()
+      .id(View.generateViewId())
+      .models(titleModels)
+      .addIf(!titleModels.isEmpty(), this);
+
+    model
+      .voteAverage(data.movieInfo().voteAverage())
+      .overview(data.movieInfo().overview())
+      .releaseDate(data.movieInfo().releaseDate())
+      .addTo(this);
+
+    List<ItemDetailsTitleBindingModel_> videoModels = StreamSupport
+      .stream(data.movieVideos())
+      .filter(videoModel -> videoModel.hostingUrl().equals(VIDEO_YOUTUBE))
+      .map(videoModel -> {
+        ItemDetailsTitleBindingModel_ model = new ItemDetailsTitleBindingModel_()
+          .title(videoModel.name())
+          .id(View.generateViewId());
+        model.clickListener(v -> LangUtils.safeInvoke(actions, a -> a.onVideoClickedAction(videoModel)));
+        return model;
+      })
+      .collect(Collectors.toList());
+
+    new RecyclerModel_()
+      .id(View.generateViewId())
+      .models(videoModels)
+      .addIf(!videoModels.isEmpty(), this);
   }
 }
