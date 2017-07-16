@@ -5,9 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="voteAverage" type="String"/>
-        <variable name="releaseDate" type="String"/>
-        <variable name="overview" type="String"/>
+        <variable
+            name="voteAverage" type="String"/>
+        <variable
+            name="releaseDate" type="String"/>
+        <variable
+            name="overview" type="String"/>
     </data>
 
     <LinearLayout
