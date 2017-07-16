@@ -2,9 +2,11 @@ package ru.rinekri.udacitypopularmovies.ui.details;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -37,12 +39,10 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
 
   @BindView(R.id.backdrop)
   ImageView moviePoster;
-  @BindView(R.id.details_release_date)
-  TextView releaseDate;
-  @BindView(R.id.details_vote_average)
-  TextView voteAverage;
-  @BindView(R.id.details_overview)
-  TextView overview;
+  @BindView(R.id.content_container)
+  RecyclerView content;
+
+  private DetailsContentController contentController = new DetailsContentController();
 
   @InjectPresenter
   public DetailsPresenter presenter;
@@ -66,14 +66,29 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
   }
 
   @Override
+  protected void initView() {
+    content.setLayoutManager(new LinearLayoutManager(this));
+    content.setAdapter(contentController.getAdapter());
+  }
+
+  @Override
   public void showViewContent(DetailsMvp.PM data) {
     super.showViewContent(data);
-    Picasso
-      .with(this)
+    Picasso.with(this)
       .load(data.movieInfo().backDropUrl())
       .into(moviePoster);
-    voteAverage.setText(data.movieInfo().voteAverage());
-    overview.setText(data.movieInfo().overview());
-    releaseDate.setText(data.movieInfo().releaseDate());
+    contentController.setData(data);
+  }
+
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    contentController.onSaveInstanceState(outState);
+  }
+
+  @Override
+  protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    super.onRestoreInstanceState(savedInstanceState);
+    contentController.onRestoreInstanceState(savedInstanceState);
   }
 }

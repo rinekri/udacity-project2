@@ -21,6 +21,7 @@ public abstract class MovieInfo implements Parcelable {
   @PosterUrlAdapter.Annotation
   public abstract String posterUrl();
   public abstract Boolean adult();
+  @Nullable
   public abstract String overview();
   @Json(name = "release_date")
   public abstract String releaseDate();

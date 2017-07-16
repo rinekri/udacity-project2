@@ -26,7 +26,7 @@ public class DetailsMvp {
   abstract public static class PM implements Parcelable {
     abstract MovieShortInfo movieInfo();
     abstract List<MovieVideo> movieVideos();
-    abstract List<MovieReview> mMovieReviews();
+    abstract List<MovieReview> movieReviews();
     abstract List<MovieTitle> movieTitles();
     abstract List<MovieCharacter> movieCharacters();
     abstract List<MovieInfo> recommendedMovies();

@@ -15,6 +15,7 @@ public abstract class MovieShortInfo implements Parcelable {
   @Nullable
   public abstract String backDropUrl();
   public abstract String overview();
+  @Nullable
   public abstract String releaseDate();
   public abstract String title();
   public abstract String voteAverage();
