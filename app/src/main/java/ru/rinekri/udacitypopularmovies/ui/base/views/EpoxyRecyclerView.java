@@ -32,6 +32,7 @@ public class EpoxyRecyclerView extends RecyclerView {
       setAdapter(controller.getAdapter());
     }
     controller.setModels(models);
+    setNestedScrollingEnabled(false);
   }
 
   public void clearModels() {

@@ -10,8 +10,8 @@ import java.util.List;
 
 import java8.util.stream.Collectors;
 import java8.util.stream.StreamSupport;
+import ru.rinekri.udacitypopularmovies.ItemDetailsChipBindingModel_;
 import ru.rinekri.udacitypopularmovies.ItemDetailsMovieInfoBindingModel_;
-import ru.rinekri.udacitypopularmovies.ItemDetailsTitleBindingModel_;
 import ru.rinekri.udacitypopularmovies.network.models.MovieVideo;
 import ru.rinekri.udacitypopularmovies.ui.base.data_binding.RecyclerModel_;
 import ru.rinekri.udacitypopularmovies.ui.utils.LangUtils;
@@ -45,10 +45,10 @@ class DetailsContentController extends TypedEpoxyController<DetailsMvp.PM> {
 
   @Override
   protected void buildModels(DetailsMvp.PM data) {
-    List<ItemDetailsTitleBindingModel_> titleModels = StreamSupport
+    List<ItemDetailsChipBindingModel_> titleModels = StreamSupport
       .stream(data.movieTitles())
       .map(titleModel -> {
-        ItemDetailsTitleBindingModel_ model = new ItemDetailsTitleBindingModel_()
+        ItemDetailsChipBindingModel_ model = new ItemDetailsChipBindingModel_()
           .id(View.generateViewId())
           .title(titleModel.getShortName());
         model.clickListener(v -> LangUtils.safeInvoke(actions, a -> a.onTitleClickedAction(titleModel.name())));
@@ -67,11 +67,11 @@ class DetailsContentController extends TypedEpoxyController<DetailsMvp.PM> {
       .releaseDate(data.movieInfo().releaseDate())
       .addTo(this);
 
-    List<ItemDetailsTitleBindingModel_> videoModels = StreamSupport
+    List<ItemDetailsChipBindingModel_> videoModels = StreamSupport
       .stream(data.movieVideos())
       .filter(videoModel -> videoModel.hostingUrl().equals(VIDEO_YOUTUBE))
       .map(videoModel -> {
-        ItemDetailsTitleBindingModel_ model = new ItemDetailsTitleBindingModel_()
+        ItemDetailsChipBindingModel_ model = new ItemDetailsChipBindingModel_()
           .title(videoModel.name())
           .id(View.generateViewId());
         model.clickListener(v -> LangUtils.safeInvoke(actions, a -> a.onVideoClickedAction(videoModel)));
