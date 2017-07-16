@@ -12,6 +12,10 @@ public abstract class MovieTitle {
   @Json(name = "title")
   public abstract String name();
 
+  public String getShortName() {
+    return (name().length() <= 10 ? name() : name().substring(0, 10)).concat("...");
+  }
+
   public static JsonAdapter<MovieTitle> jsonAdapter(Moshi moshi) {
     return new AutoValue_MovieTitle.MoshiJsonAdapter(moshi);
   }

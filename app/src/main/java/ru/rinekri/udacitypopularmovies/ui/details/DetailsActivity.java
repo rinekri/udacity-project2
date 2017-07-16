@@ -19,8 +19,9 @@ import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
 import ru.rinekri.udacitypopularmovies.ui.base.models.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.utils.ContextUtils;
+import ru.rinekri.udacitypopularmovies.ui.utils.ViewUtils;
 
-public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements DetailsMvp.View {
+public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements DetailsMvp.View, DetailsContentController.Actions {
   private static final String EXTRA_MOVIE_SHORT_INFO = BuildConfig.APPLICATION_ID + ".extra_short_info";
   private static final String EXTRA_TITLE = BuildConfig.APPLICATION_ID + ".extra_title";
 
@@ -42,7 +43,7 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
   @BindView(R.id.content_container)
   RecyclerView content;
 
-  private DetailsContentController contentController = new DetailsContentController();
+  private DetailsContentController contentController = new DetailsContentController(this);
 
   @InjectPresenter
   public DetailsPresenter presenter;
@@ -90,5 +91,10 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
   protected void onRestoreInstanceState(Bundle savedInstanceState) {
     super.onRestoreInstanceState(savedInstanceState);
     contentController.onRestoreInstanceState(savedInstanceState);
+  }
+
+  @Override
+  public void onTitleClickedAction(String fullTitle) {
+    ViewUtils.showSnack(content, fullTitle);
   }
 }
