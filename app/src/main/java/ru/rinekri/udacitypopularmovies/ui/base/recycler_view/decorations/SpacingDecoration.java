@@ -15,7 +15,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 public class SpacingDecoration extends ItemDecoration {
   //TODO: Add logic to define size in constructor
   private static final int OUTER_PADDING_DP = 8;
-  private static final int INNER_PADDING_DP = 2;
+  private static final int INNER_PADDING_DP = 4;
   private int outerPadding = -1;
   private int innerPadding = -1;
 
