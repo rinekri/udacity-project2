@@ -1,4 +1,4 @@
-@EpoxyDataBindingLayouts(R.layout.item_details_movie_info)
+@EpoxyDataBindingLayouts({R.layout.item_details_movie_info, R.layout.item_details_title})
 package ru.rinekri.udacitypopularmovies.ui.details;
 
 import com.airbnb.epoxy.EpoxyDataBindingLayouts;

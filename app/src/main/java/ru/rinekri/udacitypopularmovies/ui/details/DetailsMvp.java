@@ -14,12 +14,11 @@ import ru.rinekri.udacitypopularmovies.network.models.MovieTitle;
 import ru.rinekri.udacitypopularmovies.network.models.MovieVideo;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpView;
 
-public class DetailsMvp {
+class DetailsMvp {
   public interface View extends BaseMvpView<PM> {
   }
 
-  public static class Router {
-
+  static class Router {
   }
 
   @AutoValue

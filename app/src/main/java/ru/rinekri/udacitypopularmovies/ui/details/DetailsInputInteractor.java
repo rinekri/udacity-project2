@@ -12,10 +12,10 @@ import ru.rinekri.udacitypopularmovies.network.models.MovieVideo;
 import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 
-public class DetailsInputInteractor implements SyncInteractor<MovieShortInfo, DetailsMvp.PM> {
+class DetailsInputInteractor implements SyncInteractor<MovieShortInfo, DetailsMvp.PM> {
   private MainServiceApi serviceApi;
 
-  public DetailsInputInteractor(MainServiceApi serviceApi) {
+  DetailsInputInteractor(MainServiceApi serviceApi) {
     this.serviceApi = serviceApi;
   }
 

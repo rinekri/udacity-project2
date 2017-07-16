@@ -5,7 +5,7 @@ import com.airbnb.epoxy.TypedEpoxyController;
 
 import ru.rinekri.udacitypopularmovies.ItemDetailsMovieInfoBindingModel_;
 
-public class DetailsContentController extends TypedEpoxyController<DetailsMvp.PM> {
+class DetailsContentController extends TypedEpoxyController<DetailsMvp.PM> {
   @AutoModel
   ItemDetailsMovieInfoBindingModel_ model;
 

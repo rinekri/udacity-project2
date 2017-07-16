@@ -16,8 +16,8 @@ public class DetailsPresenter extends BaseMvpPresenter<DetailsMvp.PM, DetailsMvp
   @NonNull
   private MovieShortInfo movieShortInfo;
 
-  public DetailsPresenter(@NonNull MovieShortInfo movieShortInfo,
-                          @NonNull SyncInteractor<MovieShortInfo, DetailsMvp.PM> inputInteractor) {
+  DetailsPresenter(@NonNull MovieShortInfo movieShortInfo,
+                   @NonNull SyncInteractor<MovieShortInfo, DetailsMvp.PM> inputInteractor) {
     this.movieShortInfo = movieShortInfo;
     this.inputInteractor = inputInteractor;
   }
