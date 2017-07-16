@@ -52,6 +52,7 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
     initView();
   }
 
+  @SuppressWarnings("ConstantConditions")
   private void initActionBar(ActivityConfig config) {
     //TODO: Transfer Toolbar and AppBar from each layout to shell
     toolbar = ButterKnife.findById(this, R.id.toolbar);
