@@ -6,9 +6,9 @@ import android.widget.Toast;
 import ru.rinekri.udacitypopularmovies.ApplicationComponent;
 import ru.rinekri.udacitypopularmovies.MyApplication;
 
-public class ContextUtils {
+public final class ContextUtils {
   public ContextUtils() {
-    throw new RuntimeException("Static class");
+    throw new RuntimeException("static class");
   }
 
   public static ApplicationComponent appComponent(Context context) {

@@ -1,6 +1,7 @@
 package ru.rinekri.udacitypopularmovies.network.models;
 
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
@@ -9,15 +10,18 @@ import com.squareup.moshi.Moshi;
 
 import java.util.List;
 
+import ru.rinekri.udacitypopularmovies.network.type_adapters.BackdropUrlAdapter;
 import ru.rinekri.udacitypopularmovies.network.type_adapters.PosterUrlAdapter;
 
 @AutoValue
 public abstract class MovieInfo implements Parcelable {
-  public abstract Long id();
+  public abstract String id();
+  @Nullable
   @Json(name = "poster_path")
   @PosterUrlAdapter.Annotation
-  public abstract String posterUrlSmall();
+  public abstract String posterUrl();
   public abstract Boolean adult();
+  @Nullable
   public abstract String overview();
   @Json(name = "release_date")
   public abstract String releaseDate();
@@ -28,12 +32,15 @@ public abstract class MovieInfo implements Parcelable {
   public abstract String title();
   @Json(name = "original_language")
   public abstract String originalLanguage();
+  @Nullable
   @Json(name = "backdrop_path")
-  public abstract String backdropPath();
+  @BackdropUrlAdapter.Annotation
+  public abstract String backdropUrl();
   public abstract String popularity();
   @Json(name = "vote_count")
   public abstract String voteCount();
-  public abstract Boolean video();
+  @Json(name = "video")
+  public abstract Boolean hasVideo();
   @Json(name = "vote_average")
   public abstract String voteAverage();
 

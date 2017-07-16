@@ -16,6 +16,7 @@ import ru.rinekri.udacitypopularmovies.annotations.ApplicationScope;
 import ru.rinekri.udacitypopularmovies.network.interceptors.ApiRequestInterceptor;
 import ru.rinekri.udacitypopularmovies.network.json_adapters.MoshiAutoValueAdapterFactory;
 import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
+import ru.rinekri.udacitypopularmovies.network.type_adapters.BackdropUrlAdapter;
 import ru.rinekri.udacitypopularmovies.network.type_adapters.PosterUrlAdapter;
 
 import static ru.rinekri.udacitypopularmovies.network.NetworkConstants.API_VERSION;
@@ -41,6 +42,7 @@ public class NetworkModule {
     return new Moshi.Builder()
       .add(MoshiAutoValueAdapterFactory.create())
       .add(new PosterUrlAdapter())
+      .add(new BackdropUrlAdapter())
       .build();
   }
 

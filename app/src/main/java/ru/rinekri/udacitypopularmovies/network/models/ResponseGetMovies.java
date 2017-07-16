@@ -9,15 +9,15 @@ import java.util.List;
 
 //TODO: Fix JsonAdapter for model with generic
 @AutoValue
-public abstract class PagedResponse {
-  public abstract Integer page();
+public abstract class ResponseGetMovies {
+  public abstract int page();
   public abstract List<MovieInfo> results();
   @Json(name = "total_results")
   public abstract Long totalResults();
   @Json(name = "total_pages")
   public abstract Long totalPages();
 
-  public static JsonAdapter<PagedResponse> jsonAdapter(Moshi moshi) {
-    return new AutoValue_PagedResponse.MoshiJsonAdapter(moshi);
+  public static JsonAdapter<ResponseGetMovies> jsonAdapter(Moshi moshi) {
+    return new AutoValue_ResponseGetMovies.MoshiJsonAdapter(moshi);
   }
 }

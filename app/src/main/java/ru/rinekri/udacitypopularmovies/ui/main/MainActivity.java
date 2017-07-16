@@ -23,7 +23,7 @@ import static ru.rinekri.udacitypopularmovies.ui.UiConstants.GRID_COLUMNS;
 
 public class MainActivity extends BaseMvpActivity<MainMvp.PM> implements MainMvp.View {
 
-  @BindView(R.id.content_container_view)
+  @BindView(R.id.content_container)
   RecyclerView contentView;
 
   TextView toolbarTitle;

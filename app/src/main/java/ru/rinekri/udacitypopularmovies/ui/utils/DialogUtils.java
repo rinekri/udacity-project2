@@ -11,9 +11,9 @@ import java.util.List;
 import java8.util.function.Consumer;
 import ru.rinekri.udacitypopularmovies.R;
 
-public class DialogUtils {
+public final class DialogUtils {
   public DialogUtils() {
-    throw new RuntimeException("Static class");
+    throw new RuntimeException("static class");
   }
 
   @SuppressWarnings("unchecked")

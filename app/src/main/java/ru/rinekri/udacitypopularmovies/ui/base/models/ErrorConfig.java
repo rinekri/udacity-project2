@@ -11,6 +11,7 @@ import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
+import ru.rinekri.udacitypopularmovies.BuildConfig;
 import ru.rinekri.udacitypopularmovies.R;
 
 @AutoValue
@@ -22,9 +23,12 @@ public abstract class ErrorConfig {
   public abstract String errorMessageText();
 
   public String resolveTitle(Context context) {
-    String error = null;
+    String error;
     if (errorMessageText() != null) {
-      error = errorMessageText();
+      error = context.getString(R.string.error_default);
+      if (BuildConfig.DEBUG) {
+        error += " (" + errorMessageText() + ")";
+      }
     } else if (errorMessageRes() != 0) {
       error = context.getString(errorMessageRes());
     } else {
@@ -46,7 +50,7 @@ public abstract class ErrorConfig {
     } else if (error instanceof SocketTimeoutException) {
       return builder().errorMessageRes(R.string.error_network_timeout).build();
     }
-    return builder().build();
+    return builder().errorMessageText(error.getMessage()).build();
   }
 
   @AutoValue.Builder

@@ -14,6 +14,7 @@ import ru.rinekri.udacitypopularmovies.R;
 import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 import ru.rinekri.udacitypopularmovies.ui.base.recycler_view.BaseSimpleAdapter;
 import ru.rinekri.udacitypopularmovies.ui.base.recycler_view.BaseViewHolder;
+import ru.rinekri.udacitypopularmovies.ui.utils.LangUtils;
 
 class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainViewHolder> {
   @Nullable
@@ -54,20 +55,18 @@ class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainViewHolde
 
     @Override
     public void fill(MovieInfo item) {
-      //TODO: Add error handling and placeholder showing
       Picasso
         .with(poster.getContext())
-        .load(item.posterUrlSmall())
+        .load(item.posterUrl())
         .placeholder(R.drawable.ic_main_placeholder)
         .into(poster);
 
       itemView.setOnClickListener((view) -> {
-        if (MainAdapter.this.onPosterClickAction != null) {
-          MainAdapter.this.onPosterClickAction.accept(item);
-        }
+        LangUtils.safeInvoke(onPosterClickAction,
+          action -> action.accept(item));
       });
       itemView.setOnLongClickListener(view -> {
-        if (MainAdapter.this.onPosterLongClickAction != null) {
+        if (onPosterLongClickAction != null) {
           onPosterLongClickAction.accept(item);
           return true;
         }
