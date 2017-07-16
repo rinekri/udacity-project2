@@ -16,7 +16,7 @@
         android:id="@+id/overviewText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_tag"
+        android:background="@drawable/bg_round"
         android:clickable="true"
         android:foreground="?attr/selectableItemBackground"
         android:onClick="@{clickListener}"
