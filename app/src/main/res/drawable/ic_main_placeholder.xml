@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <bitmap android:alpha="100" android:src="@drawable/main_placeholder"/>
+        <bitmap android:alpha="0.8" android:src="@drawable/main_placeholder"/>
     </item>
 </layer-list>
