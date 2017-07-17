@@ -20,9 +20,9 @@ import ru.rinekri.udacitypopularmovies.network.models.MovieReview;
 import ru.rinekri.udacitypopularmovies.network.models.MovieVideo;
 import ru.rinekri.udacitypopularmovies.ui.base.data_binding.RecyclerModel_;
 import ru.rinekri.udacitypopularmovies.ui.base.recycler_view.decorations.SpacingDecoration;
-import ru.rinekri.udacitypopularmovies.ui.utils.LangUtils;
 
 import static ru.rinekri.udacitypopularmovies.ui.UiConstants.VIDEO_YOUTUBE;
+import static ru.rinekri.udacitypopularmovies.ui.utils.LangUtils.safeInvoke;
 
 class DetailsContentController extends TypedEpoxyController<DetailsMvp.PM> {
 
@@ -39,10 +39,6 @@ class DetailsContentController extends TypedEpoxyController<DetailsMvp.PM> {
   @NonNull
   private List<RecyclerView.ItemDecoration> defaultItemDecorations
     = Lists.newArrayList(new SpacingDecoration());
-
-  public DetailsContentController() {
-    this(null);
-  }
 
   DetailsContentController(@Nullable Actions actions) {
     this.actions = actions;
@@ -62,7 +58,7 @@ class DetailsContentController extends TypedEpoxyController<DetailsMvp.PM> {
         ItemDetailsChipBindingModel_ model = new ItemDetailsChipBindingModel_()
           .id(View.generateViewId())
           .title(titleModel.getShortName());
-        model.clickListener(v -> LangUtils.safeInvoke(actions, a -> a.onTitleClicked(titleModel.name())));
+        model.clickListener(v -> safeInvoke(actions, a -> a.onTitleClicked(titleModel.name())));
         return model;
       })
       .collect(Collectors.toList());
@@ -86,7 +82,7 @@ class DetailsContentController extends TypedEpoxyController<DetailsMvp.PM> {
         ItemDetailsChipBindingModel_ model = new ItemDetailsChipBindingModel_()
           .title(videoModel.name())
           .id(View.generateViewId());
-        model.clickListener(v -> LangUtils.safeInvoke(actions, a -> a.onVideoClicked(videoModel)));
+        model.clickListener(v -> safeInvoke(actions, a -> a.onVideoClicked(videoModel)));
         return model;
       })
       .collect(Collectors.toList());
@@ -104,7 +100,7 @@ class DetailsContentController extends TypedEpoxyController<DetailsMvp.PM> {
           .author(reviewModel.author())
           .overview(reviewModel.content())
           .id(View.generateViewId());
-        model.clickListener(v -> LangUtils.safeInvoke(actions, a -> a.onOverviewAuthorClicked(reviewModel)));
+        model.clickListener(v -> safeInvoke(actions, a -> a.onOverviewAuthorClicked(reviewModel)));
         return model;
       })
       .collect(Collectors.toList());

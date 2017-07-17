@@ -108,6 +108,6 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
 
   @Override
   public void onOverviewAuthorClicked(MovieReview movieReview) {
-    //TODO: Add logic to open site with overview
+    ContextUtils.openWeb(this, movieReview.url());
   }
 }
