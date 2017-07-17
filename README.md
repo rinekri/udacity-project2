@@ -19,14 +19,14 @@ UI contains an element (e.g., a spinner or settings menu) to toggle the sort ord
 Movies are displayed in the main layout via a grid of their corresponding movie poster thumbnails. | Resolved
 UI contains a screen for displaying the details for a selected movie. | Resolved
 Movie Details layout contains **title**, **release date**, **movie poster**, **vote average**, and **plot synopsis**. | Resolved
-Movie Details layout contains a section for displaying trailer videos and user reviews. | In Progress
+Movie Details layout contains a section for displaying trailer videos and user reviews. | Resolved
 When a user changes the sort criteria (most popular, highest rated, and **favorites**) the main view gets updated correctly. | Resolved
 When a movie poster thumbnail is selected, the movie details screen is launched. | Resolved
 When a trailer is selected, app uses an Intent to launch the trailer. | In Progress
 In the movies detail screen, a user can tap a button (for example, a star) to mark it as a Favorite. | In Progress
 In a background thread, app queries the **/movie/popular** or **/movie/top_rated** API for the sort criteria specified in the settings menu. | Resolved
-App requests for related videos for a selected movie via the **/movie/{id}/videos** endpoint in a background thread and displays those details when the user selects a movie. | In Progress
-App requests for user reviews for a selected movie via the **/movie/{id}/reviews** endpoint in a background thread and displays those details when the user selects a movie. | In Progress
+App requests for related videos for a selected movie via the **/movie/{id}/videos** endpoint in a background thread and displays those details when the user selects a movie. | Resolved
+App requests for user reviews for a selected movie via the **/movie/{id}/reviews** endpoint in a background thread and displays those details when the user selects a movie. | Resolved
 The titles and ids of the user's favorite movies are stored in a **ContentProvider backed by a SQLite database**. This ContentProvider is updated whenever the user favorites or unfavorites a movie. | In Progress
 When the "favorites" setting option is selected, the main view displays the entire favorites collection based on movie ids stored in the ContentProvider. | In Progress
 
@@ -47,8 +47,7 @@ Retrofit</br>
 Moshi</br>
 OkHttp3</br>
 Moxy</br>
-AutoValue</br>
-AutoParcel</br>
+AutoValue + AutoParcel</br>
 Dagger2</br>
 Picasso</br>
 Timber</br>
@@ -57,3 +56,4 @@ ButterKnife</br>
 Support Libs</br>
 StreamsSupport</br>
 retrolambda</br>
+Epoxy</br>
