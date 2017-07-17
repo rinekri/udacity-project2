@@ -53,7 +53,7 @@ Picasso</br>
 Timber</br>
 Calligraphy</br>
 ButterKnife</br>
-Support Libs</br>
+Support Libs (ConstraintLayout too)</br>
 StreamsSupport</br>
 retrolambda</br>
 Epoxy</br>
