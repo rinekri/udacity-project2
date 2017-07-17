@@ -22,7 +22,7 @@ Movie Details layout contains **title**, **release date**, **movie poster**, **v
 Movie Details layout contains a section for displaying trailer videos and user reviews. | Resolved
 When a user changes the sort criteria (most popular, highest rated, and **favorites**) the main view gets updated correctly. | Resolved
 When a movie poster thumbnail is selected, the movie details screen is launched. | Resolved
-When a trailer is selected, app uses an Intent to launch the trailer. | In Progress
+When a trailer is selected, app uses an Intent to launch the trailer. | Resolved
 In the movies detail screen, a user can tap a button (for example, a star) to mark it as a Favorite. | In Progress
 In a background thread, app queries the **/movie/popular** or **/movie/top_rated** API for the sort criteria specified in the settings menu. | Resolved
 App requests for related videos for a selected movie via the **/movie/{id}/videos** endpoint in a background thread and displays those details when the user selects a movie. | Resolved
