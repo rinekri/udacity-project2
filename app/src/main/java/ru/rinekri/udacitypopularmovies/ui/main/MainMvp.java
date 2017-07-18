@@ -15,7 +15,7 @@ import ru.rinekri.udacitypopularmovies.ui.details.DetailsActivity;
 import ru.rinekri.udacitypopularmovies.ui.details.MovieShortInfo;
 import ru.rinekri.udacitypopularmovies.ui.utils.ViewUtils;
 
-public class MainMvp {
+class MainMvp {
   public interface View extends BaseMvpView<PM> {
     void showInitContent(IM data);
   }
@@ -43,20 +43,20 @@ public class MainMvp {
     }
   }
 
-  public static class Router {
+  static class Router {
     private Context context;
     private android.view.View messageView;
 
-    public Router(Context context, android.view.View messageView) {
+    Router(Context context, android.view.View messageView) {
       this.context = context;
       this.messageView = messageView;
     }
 
-    public void showDetailInfo(MovieShortInfo movieInfo) {
+    void showDetailInfo(MovieShortInfo movieInfo) {
       DetailsActivity.start(context, movieInfo);
     }
 
-    public void showMessage(String text) {
+    void showMessage(String text) {
       ViewUtils.showSnack(messageView, text);
     }
   }
