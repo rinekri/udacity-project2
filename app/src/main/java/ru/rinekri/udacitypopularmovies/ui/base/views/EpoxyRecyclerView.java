@@ -21,6 +21,7 @@ public class EpoxyRecyclerView extends RecyclerView {
     super(context, attrs);
     setHasFixedSize(true);
     layoutManager = new GridLayoutManager(context, SPAN_COUNT, GridLayoutManager.HORIZONTAL, false);
+    setLayoutParams(new RecyclerView.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
     setLayoutManager(layoutManager);
   }
 
@@ -32,6 +33,7 @@ public class EpoxyRecyclerView extends RecyclerView {
       setAdapter(controller.getAdapter());
     }
     controller.setModels(models);
+    setNestedScrollingEnabled(false);
   }
 
   public void clearModels() {
