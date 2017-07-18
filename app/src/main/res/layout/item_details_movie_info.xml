@@ -16,7 +16,9 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/details_default_card_margin">
+        android:layout_marginEnd="@dimen/details_default_card_margin"
+        android:layout_marginStart="@dimen/details_default_card_margin"
+        android:layout_marginTop="@dimen/details_default_card_margin">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,7 +26,7 @@
             android:padding="@dimen/base_padding">
 
             <TextView
-                android:id="@+id/overviewText"
+                android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="start"
@@ -39,18 +41,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_oval"
-                android:gravity="center_vertical|end"
+                android:gravity="center"
+                android:minWidth="38dp"
                 android:padding="8dp"
                 android:text="@{voteAverage}"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/overviewText"
-                tools:text="7.8"/>
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:text="7.3"/>
 
             <TextView
-                android:id="@+id/releaseDateText"
+                android:id="@+id/author"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"

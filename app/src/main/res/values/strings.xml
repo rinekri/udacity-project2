@@ -10,4 +10,5 @@
     <string name="error_default">Something went wrong</string>
     <string name="error_no_network">No internet connection. Check it</string>
     <string name="error_network_timeout">Unable to retrieve data</string>
+    <string name="share_error">There is no application for this functionality</string>
 </resources>

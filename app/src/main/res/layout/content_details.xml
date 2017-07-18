@@ -33,7 +33,9 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/content_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/base_padding"/>
     </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>

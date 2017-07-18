@@ -15,6 +15,8 @@ import com.squareup.picasso.Picasso;
 import butterknife.BindView;
 import ru.rinekri.udacitypopularmovies.BuildConfig;
 import ru.rinekri.udacitypopularmovies.R;
+import ru.rinekri.udacitypopularmovies.network.models.MovieReview;
+import ru.rinekri.udacitypopularmovies.network.models.MovieVideo;
 import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
 import ru.rinekri.udacitypopularmovies.ui.base.models.ActivityConfig;
@@ -94,7 +96,18 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
   }
 
   @Override
-  public void onTitleClickedAction(String fullTitle) {
+  public void onTitleClicked(String fullTitle) {
     ViewUtils.showSnack(content, fullTitle);
+  }
+
+  @Override
+  public void onVideoClicked(MovieVideo movieVideo) {
+    //TODO: Fix movie open
+    ContextUtils.openYoutubeVideo(this, movieVideo.id());
+  }
+
+  @Override
+  public void onOverviewAuthorClicked(MovieReview movieReview) {
+    ContextUtils.openWeb(this, movieReview.url());
   }
 }

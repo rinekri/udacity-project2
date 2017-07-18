@@ -23,4 +23,10 @@ public final class LangUtils {
       safeFunc.accept(target);
     }
   }
+
+  public static void check(boolean condition) {
+    if (!condition) {
+      throw new RuntimeException("Unsupported operation exception");
+    }
+  }
 }
