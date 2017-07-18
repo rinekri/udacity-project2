@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
@@ -21,9 +22,8 @@ import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
 import ru.rinekri.udacitypopularmovies.ui.base.models.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.utils.ContextUtils;
-import ru.rinekri.udacitypopularmovies.ui.utils.ViewUtils;
 
-public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements DetailsMvp.View, DetailsContentController.Actions {
+public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements DetailsMvp.View {
   private static final String EXTRA_MOVIE_SHORT_INFO = BuildConfig.APPLICATION_ID + ".extra_short_info";
   private static final String EXTRA_TITLE = BuildConfig.APPLICATION_ID + ".extra_title";
 
@@ -44,8 +44,10 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
   ImageView moviePoster;
   @BindView(R.id.content_container)
   RecyclerView content;
+  @BindView(R.id.addToFavoritesButton)
+  FloatingActionButton addToFavoritesButton;
 
-  private DetailsContentController contentController = new DetailsContentController(this);
+  private DetailsContentController contentController;
 
   @InjectPresenter
   public DetailsPresenter presenter;
@@ -56,6 +58,12 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
     MainServiceApi api = ContextUtils.appComponent(this).mainServiceApi();
     DetailsInputInteractor interactor = new DetailsInputInteractor(api);
     return new DetailsPresenter(movieShortInfo, interactor);
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    presenter.setRouter(new DetailsMvp.Router(this, content));
   }
 
   @Override
@@ -71,7 +79,26 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
   @Override
   protected void initView() {
     content.setLayoutManager(new LinearLayoutManager(this));
+    contentController = new DetailsContentController(new DetailsContentController.Actions() {
+
+      @Override
+      public void onTitleClicked(String fullTitle) {
+        presenter.onMovieTitleClicked(fullTitle);
+      }
+
+      @Override
+      public void onVideoClicked(MovieVideo movieVideo) {
+        presenter.onMovieVideoClicked(movieVideo);
+      }
+
+      @Override
+      public void onOverviewAuthorClicked(MovieReview movieReview) {
+        presenter.onMovieOverviewClicked(movieReview);
+      }
+    });
     content.setAdapter(contentController.getAdapter());
+    addToFavoritesButton.setOnClickListener(v ->
+      presenter.onAddToFavoritesClicked());
   }
 
   @Override
@@ -93,21 +120,5 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
   protected void onRestoreInstanceState(Bundle savedInstanceState) {
     super.onRestoreInstanceState(savedInstanceState);
     contentController.onRestoreInstanceState(savedInstanceState);
-  }
-
-  @Override
-  public void onTitleClicked(String fullTitle) {
-    ViewUtils.showSnack(content, fullTitle);
-  }
-
-  @Override
-  public void onVideoClicked(MovieVideo movieVideo) {
-    //TODO: Fix movie open
-    ContextUtils.openYoutubeVideo(this, movieVideo.id());
-  }
-
-  @Override
-  public void onOverviewAuthorClicked(MovieReview movieReview) {
-    ContextUtils.openWeb(this, movieReview.url());
   }
 }

@@ -30,16 +30,6 @@ class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainViewHolde
     this.onPosterLongClickAction = onPosterLongClickAction;
   }
 
-  MainAdapter(@LayoutRes Integer itemLayoutRes,
-              @NonNull Consumer<MovieInfo> onPosterClickAction) {
-    super(itemLayoutRes);
-    this.onPosterClickAction = onPosterClickAction;
-  }
-
-  MainAdapter(@LayoutRes Integer itemLayoutRes) {
-    super(itemLayoutRes);
-  }
-
   @Override
   protected MainViewHolder createViewHolder(View itemView) {
     return new MainViewHolder(itemView);

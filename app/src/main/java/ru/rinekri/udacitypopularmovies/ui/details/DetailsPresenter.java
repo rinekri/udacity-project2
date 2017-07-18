@@ -5,9 +5,12 @@ import android.support.annotation.Nullable;
 
 import com.arellomobile.mvp.InjectViewState;
 
+import ru.rinekri.udacitypopularmovies.network.models.MovieReview;
+import ru.rinekri.udacitypopularmovies.network.models.MovieVideo;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpPresenter;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 
+@SuppressWarnings("ConstantConditions")
 @InjectViewState
 public class DetailsPresenter extends BaseMvpPresenter<DetailsMvp.PM, DetailsMvp.View> {
   @Nullable
@@ -22,7 +25,7 @@ public class DetailsPresenter extends BaseMvpPresenter<DetailsMvp.PM, DetailsMvp
     this.inputInteractor = inputInteractor;
   }
 
-  public void setRouter(@Nullable DetailsMvp.Router router) {
+  void setRouter(@Nullable DetailsMvp.Router router) {
     this.router = router;
   }
 
@@ -36,5 +39,21 @@ public class DetailsPresenter extends BaseMvpPresenter<DetailsMvp.PM, DetailsMvp
   protected void onFirstViewAttach() {
     super.onFirstViewAttach();
     elceAsyncRequestL(() -> inputInteractor.getData(movieShortInfo));
+  }
+
+  void onAddToFavoritesClicked() {
+    router.showMessage("TODO: onAddToFavoritesClicked");
+  }
+
+  void onMovieTitleClicked(String fullTitle) {
+    router.showMessage(fullTitle);
+  }
+
+  void onMovieVideoClicked(MovieVideo movieVideo) {
+    router.showTrailer(movieVideo);
+  }
+
+  void onMovieOverviewClicked(MovieReview movieReview) {
+    router.showReview(movieReview);
   }
 }
