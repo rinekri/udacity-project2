@@ -11,7 +11,7 @@ public final class MovieInfoContract {
 
   public static final class MovieInfoQuery {
     public static final String CREATE_TABLE =
-      "CREATE "
+      "CREATE TABLE "
         + MovieInfoEntry.TABLE_NAME + " ("
         + MovieInfoEntry.COLUMN_MOVIE_ID + " TEXT PRIMARY KEY, "
         + MovieInfoEntry.COLUMN_MOVIE_TITLE + " TEXT NOT NULL"
