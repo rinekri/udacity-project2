@@ -8,6 +8,19 @@ before_cache:
 before_install:
   - bash .travis-android-license-bugfix.sh
 
+android:
+    licenses:
+    - 'android-sdk-preview-license-52d11cd2'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+    components:
+    - platform-tools
+    - tools
+    - build-tools-26.0.0
+    - android-26
+    - extra-android-m2repository
+    - extra-google-m2repository
+
 cache:
   directories:
     # Android SDK
