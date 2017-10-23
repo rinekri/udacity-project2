@@ -2,9 +2,9 @@
 
 buildscript {
   ext {
-    targetSdkVersion = 25
+    targetSdkVersion = 26
     minSdkVersion = 19
-    buildToolsVersion = '26.0.0'
+    buildToolsVersion = '26.0.2'
     appName = 'UdacityPopularMovies'
     androidToolsGradleVersion = '2.3.3'
   }
