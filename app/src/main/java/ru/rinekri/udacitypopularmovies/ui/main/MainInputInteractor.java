@@ -11,8 +11,8 @@ import java.util.List;
 import ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract;
 import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
-import ru.rinekri.udacitypopularmovies.ui.base.models.MovieSortType;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
+import ru.rinekri.udacitypopularmovies.ui.base.models.MovieSortType;
 
 class MainInputInteractor implements SyncInteractor<MovieSortType, MainMvp.PM> {
   @NonNull
@@ -45,14 +45,21 @@ class MainInputInteractor implements SyncInteractor<MovieSortType, MainMvp.PM> {
     return MainMvp.PM.create(movies);
   }
 
+  //TODO: Transfer to ContentProvider
   @NonNull
   private List<MovieInfo> getFavoriteMovies() throws Exception {
     List<MovieInfo> movies = new ArrayList<>();
-    Cursor cursor = database.query(MovieInfoContract.MovieInfoEntry.TABLE_NAME,
+
+    Cursor request = database.query(MovieInfoContract.MovieInfoEntry.TABLE_NAME,
       null, null, null, null, null, null);
-    while (cursor.moveToNext()) {
-      String movieId = cursor.getString(cursor.getColumnIndex(MovieInfoContract.MovieInfoEntry.COLUMN_MOVIE_ID));
-      movies.add(mainServiceApi.getMovieDetails(movieId).execute().body());
+    try {
+      while (request.moveToNext()) {
+        String movieId = request.getString(request.getColumnIndex(MovieInfoContract.MovieInfoEntry.COLUMN_MOVIE_ID));
+        movies.add(mainServiceApi.getMovieDetails(movieId).execute().body());
+      }
+      request.close();
+    } finally {
+      request.close();
     }
     return movies;
   }

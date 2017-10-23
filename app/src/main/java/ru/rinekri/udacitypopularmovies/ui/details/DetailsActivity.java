@@ -56,9 +56,9 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
   @ProvidePresenter
   public DetailsPresenter providePresenter() {
     MovieShortInfo movieShortInfo = getIntent().getParcelableExtra(EXTRA_MOVIE_SHORT_INFO);
-    MainServiceApi api = ContextUtils.appComponent(this).mainServiceApi();
-    DetailsInputInteractor interactor = new DetailsInputInteractor(api);
     SQLiteOpenHelper dbHelper = ContextUtils.appComponent(this).databaseHelper();
+    MainServiceApi api = ContextUtils.appComponent(this).mainServiceApi();
+    DetailsInputInteractor interactor = new DetailsInputInteractor(api, dbHelper);
     DetailsSaveFavoriteInteractor saveFavoriteInteractor = new DetailsSaveFavoriteInteractor(dbHelper);
     return new DetailsPresenter(movieShortInfo, saveFavoriteInteractor, interactor);
   }

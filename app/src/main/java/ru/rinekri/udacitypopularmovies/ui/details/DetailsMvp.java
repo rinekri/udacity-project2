@@ -47,28 +47,22 @@ class DetailsMvp {
       ViewUtils.showSnack(messageView, text);
     }
 
-    void showMessage(@StringRes int textRes, Object... args) {
-      ViewUtils.showSnack(messageView, context.getString(textRes, args));
+    void showMessage(@StringRes int textRes, String... options) {
+      ViewUtils.showSnack(messageView, context.getString(textRes));
     }
   }
 
   @AutoValue
   abstract public static class PM implements Parcelable {
     abstract MovieShortInfo movieInfo();
-
     abstract List<MovieVideo> movieVideos();
-
     abstract List<MovieReview> movieReviews();
-
     abstract List<MovieTitle> movieTitles();
-
     abstract List<MovieCharacter> movieCharacters();
-
     abstract List<MovieInfo> recommendedMovies();
-
     abstract List<MovieInfo> similarMovies();
-
     abstract List<MovieKeyword> keywords();
+    abstract Boolean isInFavorite();
 
     public static PM create(@NonNull MovieShortInfo movieShortInfo,
                             @NonNull List<MovieVideo> movieVideos,
@@ -77,7 +71,8 @@ class DetailsMvp {
                             @NonNull List<MovieCharacter> movieCharacters,
                             @NonNull List<MovieInfo> recommendedMovies,
                             @NonNull List<MovieInfo> similarMovies,
-                            @NonNull List<MovieKeyword> keywords) {
+                            @NonNull List<MovieKeyword> keywords,
+                            boolean isInFavorites) {
       return new AutoValue_DetailsMvp_PM(
         movieShortInfo,
         movieVideos,
@@ -86,7 +81,8 @@ class DetailsMvp {
         movieCharacters,
         recommendedMovies,
         similarMovies,
-        keywords);
+        keywords,
+        isInFavorites);
     }
   }
 }
