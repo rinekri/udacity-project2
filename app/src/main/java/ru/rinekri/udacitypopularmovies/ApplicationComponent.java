@@ -1,6 +1,7 @@
 package ru.rinekri.udacitypopularmovies;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import dagger.Component;
 import ru.rinekri.udacitypopularmovies.annotations.ApplicationScope;
@@ -13,4 +14,5 @@ import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 public interface ApplicationComponent {
   Context context();
   MainServiceApi mainServiceApi();
+  SQLiteOpenHelper databaseHelper();
 }
