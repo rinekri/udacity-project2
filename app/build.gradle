@@ -36,6 +36,7 @@ android {
     versionCode 1
     versionName "2.0"
     signingConfig signingConfigs.debug
+    multiDexEnabled true
 
     buildConfigField 'String', 'API_BASE_URL', '"https://api.themoviedb.org"'
     buildConfigField 'String', 'IMAGE_STORE_BASE_URL', '"http://image.tmdb.org"'
@@ -75,6 +76,7 @@ dependencies {
   annotationProcessor rootProject.ext.javaPoet
   annotationProcessor rootProject.ext.aptDepends
   provided rootProject.ext.providedDepends
+  compile 'com.android.support:multidex:1.0.1'
 
   debugCompile rootProject.ext.leakCanary
   releaseCompile rootProject.ext.leakCanaryNoOp

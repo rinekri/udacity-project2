@@ -1,7 +1,10 @@
 package ru.rinekri.udacitypopularmovies;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
+import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 
 import timber.log.Timber;
@@ -39,6 +42,13 @@ public class MyApplication extends Application {
   private void setupLogs() {
     if (BuildConfig.DEBUG) {
       Timber.plant(new Timber.DebugTree());
+      Stetho.initializeWithDefaults(this);
     }
+  }
+
+  @Override
+  protected void attachBaseContext(Context base) {
+    super.attachBaseContext(base);
+    MultiDex.install(this);
   }
 }
