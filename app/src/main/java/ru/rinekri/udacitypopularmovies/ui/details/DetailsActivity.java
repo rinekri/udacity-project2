@@ -44,8 +44,8 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
   ImageView moviePoster;
   @BindView(R.id.content_container)
   RecyclerView content;
-  @BindView(R.id.addToFavoritesButton)
-  FloatingActionButton addToFavoritesButton;
+  @BindView(R.id.favorites_button)
+  FloatingActionButton favoritesButton;
 
   private DetailsContentController contentController;
 
@@ -97,7 +97,7 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
       }
     });
     content.setAdapter(contentController.getAdapter());
-    addToFavoritesButton.setOnClickListener(v ->
+    favoritesButton.setOnClickListener(v ->
       presenter.onAddToFavoritesClicked());
   }
 
