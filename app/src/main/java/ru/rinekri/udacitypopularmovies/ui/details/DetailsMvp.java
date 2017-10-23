@@ -3,6 +3,7 @@ package ru.rinekri.udacitypopularmovies.ui.details;
 import android.content.Context;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 import com.google.auto.value.AutoValue;
 
@@ -42,8 +43,12 @@ class DetailsMvp {
       ContextUtils.openWeb(context, movieReview.url());
     }
 
-    void showMessage(String text) {
+    void showMessage(@NonNull String text) {
       ViewUtils.showSnack(messageView, text);
+    }
+
+    void showMessage(@StringRes int textRes, Object... args) {
+      ViewUtils.showSnack(messageView, context.getString(textRes, args));
     }
   }
 

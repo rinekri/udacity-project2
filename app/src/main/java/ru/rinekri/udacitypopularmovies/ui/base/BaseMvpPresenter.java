@@ -2,6 +2,7 @@ package ru.rinekri.udacitypopularmovies.ui.base;
 
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.arellomobile.mvp.MvpPresenter;
 
@@ -13,6 +14,7 @@ import java8.util.stream.StreamSupport;
 import ru.rinekri.udacitypopularmovies.ui.base.functions.UnsafeSupplier;
 import ru.rinekri.udacitypopularmovies.ui.base.models.AsyncRequestWrapper;
 import ru.rinekri.udacitypopularmovies.ui.base.models.ErrorConfig;
+import ru.rinekri.udacitypopularmovies.ui.utils.LangUtils;
 import timber.log.Timber;
 
 abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpPresenter<V> {
@@ -49,8 +51,8 @@ abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpP
                                     Consumer<D> onSuccess) {
     elceAsyncRequest(
       () -> getViewState().showLoading(),
-      onSuccess,
       onLoad,
+      onSuccess,
       (error) -> getViewState().showError(ErrorConfig.createFrom(error)));
   }
 
@@ -62,8 +64,8 @@ abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpP
                                     Consumer<Throwable> onError) {
     elceAsyncRequest(
       () -> getViewState().showLoading(),
-      (result) -> getViewState().showViewContent(result),
       onLoad,
+      (result) -> getViewState().showViewContent(result),
       onError);
   }
 
@@ -71,31 +73,35 @@ abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpP
    * Base function to async request
    */
   @SuppressWarnings("unchecked")
-  protected void elceAsyncRequest(Runnable onPrepare,
-                                  Consumer<D> onSuccess,
-                                  UnsafeSupplier<D> onLoad,
-                                  Consumer<Throwable> onError) {
+  protected <T> void elceAsyncRequest(Runnable onPrepare,
+                                      UnsafeSupplier<T> onLoad,
+                                      Consumer<T> onSuccess,
+                                      Consumer<Throwable> onError) {
 
     AsyncTask request = new NetworkRequest(
       onPrepare,
-      onSuccess,
       () -> AsyncRequestWrapper.content(onLoad.get()),
+      onSuccess,
       onError
     );
     asyncRequests.add(request);
     request.execute();
   }
 
-  private class NetworkRequest extends AsyncTask<Object, Void, AsyncRequestWrapper<D>> {
+  private class NetworkRequest<T> extends AsyncTask<Object, Void, AsyncRequestWrapper<T>> {
+    @Nullable
     private Runnable onPrepare;
-    private Consumer<D> onSuccess;
-    private UnsafeSupplier<AsyncRequestWrapper<D>> onLoad;
+    @NonNull
+    private UnsafeSupplier<AsyncRequestWrapper<T>> onLoad;
+    @Nullable
+    private Consumer<T> onSuccess;
+    @Nullable
     private Consumer<Throwable> onError;
 
-    NetworkRequest(Runnable onPrepare,
-                   Consumer<D> onSuccess,
-                   UnsafeSupplier<AsyncRequestWrapper<D>> onLoad,
-                   Consumer<Throwable> onError) {
+    NetworkRequest(@Nullable Runnable onPrepare,
+                   @NonNull UnsafeSupplier<AsyncRequestWrapper<T>> onLoad,
+                   @Nullable Consumer<T> onSuccess,
+                   @Nullable Consumer<Throwable> onError) {
       this.onPrepare = onPrepare;
       this.onLoad = onLoad;
       this.onSuccess = onSuccess;
@@ -104,12 +110,12 @@ abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpP
 
     @Override
     protected void onPreExecute() {
-      onPrepare.run();
+      LangUtils.safeInvoke(onPrepare, Runnable::run);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    protected AsyncRequestWrapper<D> doInBackground(Object... params) {
+    protected AsyncRequestWrapper<T> doInBackground(Object... params) {
       try {
         return onLoad.get();
       } catch (Exception ex) {
@@ -117,14 +123,14 @@ abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpP
       }
     }
 
-    @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
+    @SuppressWarnings({"ThrowableResultOfMethodCallIgnored", "ConstantConditions"})
     @Override
-    protected void onPostExecute(@NonNull AsyncRequestWrapper<D> result) {
+    protected void onPostExecute(@NonNull AsyncRequestWrapper<T> result) {
       if (result.data() != null) {
-        onSuccess.accept(result.data());
+        LangUtils.safeInvoke(onSuccess, s -> s.accept(result.data()));
       } else if (result.error() != null) {
         Timber.e("Loading error occurred: %s", result.error().getMessage());
-        onError.accept(result.error());
+        LangUtils.safeInvoke(onError, e -> e.accept(result.error()));
       }
     }
   }
