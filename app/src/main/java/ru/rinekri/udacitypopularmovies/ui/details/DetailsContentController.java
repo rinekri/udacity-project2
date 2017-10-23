@@ -70,7 +70,7 @@ class DetailsContentController extends TypedEpoxyController<DetailsMvp.PM> {
       .addIf(!titleModels.isEmpty(), this);
 
     model
-      .voteAverage(data.movieInfo().voteAverage())
+      .voteAverage(String.format("%.1f", Float.valueOf(data.movieInfo().voteAverage())))
       .overview(data.movieInfo().overview())
       .releaseDate(data.movieInfo().releaseDate())
       .addTo(this);
