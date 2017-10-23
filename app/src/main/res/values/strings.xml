@@ -3,8 +3,6 @@
     <string name="details_vote_average">Vote average</string>
     <string name="details_release_date">Release date</string>
     <string name="details_overview">Overview</string>
-    <string name="details_save_favorite_success">Movie \"%s\" saved to favorites</string>
-    <string name="details_save_favorite_error">Movie \"%s\" not saved to favorites</string>
     <string name="main_sort_popular_movies">Popular movies</string>
     <string name="main_sort_top_rated_movies">Top-rated movies</string>
     <string name="main_sort_favorites_movies">Favorites movies</string>

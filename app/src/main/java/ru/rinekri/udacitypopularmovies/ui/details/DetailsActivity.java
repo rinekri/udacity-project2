@@ -86,6 +86,7 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
   @Override
   protected void initView() {
     content.setLayoutManager(new LinearLayoutManager(this));
+    content.setItemAnimator(null);
     contentController = new DetailsContentController(new DetailsContentController.Actions() {
 
       @Override

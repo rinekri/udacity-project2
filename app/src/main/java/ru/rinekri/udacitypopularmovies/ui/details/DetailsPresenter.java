@@ -5,11 +5,11 @@ import android.support.annotation.Nullable;
 
 import com.arellomobile.mvp.InjectViewState;
 
-import ru.rinekri.udacitypopularmovies.R;
 import ru.rinekri.udacitypopularmovies.network.models.MovieReview;
 import ru.rinekri.udacitypopularmovies.network.models.MovieVideo;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpPresenter;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
+import ru.rinekri.udacitypopularmovies.ui.base.models.ErrorConfig;
 
 @SuppressWarnings("ConstantConditions")
 @InjectViewState
@@ -22,13 +22,13 @@ public class DetailsPresenter extends BaseMvpPresenter<DetailsMvp.PM, DetailsMvp
   @NonNull
   private SyncInteractor<MovieShortInfo, DetailsMvp.PM> inputInteractor;
   @NonNull
-  private SyncInteractor<MovieShortInfo, Object> saveFavoriteInteractor;
+  private SyncInteractor<DetailsMvp.PM, DetailsMvp.PM> saveFavoriteInteractor;
 
   @Nullable
   private DetailsMvp.PM pm;
 
   DetailsPresenter(@NonNull MovieShortInfo movieShortInfo,
-                   @NonNull SyncInteractor<MovieShortInfo, Object> saveFavoriteInteractor,
+                   @NonNull SyncInteractor<DetailsMvp.PM, DetailsMvp.PM> saveFavoriteInteractor,
                    @NonNull SyncInteractor<MovieShortInfo, DetailsMvp.PM> inputInteractor) {
     this.movieShortInfo = movieShortInfo;
     this.saveFavoriteInteractor = saveFavoriteInteractor;
@@ -56,9 +56,12 @@ public class DetailsPresenter extends BaseMvpPresenter<DetailsMvp.PM, DetailsMvp
 
   void onAddToFavoritesClicked() {
     elceAsyncRequest(null,
-      () -> saveFavoriteInteractor.getData(movieShortInfo),
-      (Void) -> router.showMessage(R.string.details_save_favorite_success, movieShortInfo.title()),
-      (error) -> router.showMessage(R.string.details_save_favorite_error, movieShortInfo.title()));
+      () -> saveFavoriteInteractor.getData(pm),
+      (pm) -> {
+        this.pm = pm;
+        getViewState().showViewContent(pm);
+      },
+      (error) -> getViewState().showError(ErrorConfig.createFrom(error)));
   }
 
   void onMovieTitleClicked(String fullTitle) {
