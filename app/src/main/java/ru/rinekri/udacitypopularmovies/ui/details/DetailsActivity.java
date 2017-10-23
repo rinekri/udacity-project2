@@ -2,10 +2,12 @@ package ru.rinekri.udacitypopularmovies.ui.details;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
@@ -23,6 +25,7 @@ import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
 import ru.rinekri.udacitypopularmovies.ui.base.models.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.utils.ContextUtils;
+import ru.rinekri.udacitypopularmovies.ui.utils.ViewUtils;
 
 public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements DetailsMvp.View {
   private static final String EXTRA_MOVIE_SHORT_INFO = BuildConfig.APPLICATION_ID + ".extra_short_info";
@@ -58,9 +61,10 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
     MovieShortInfo movieShortInfo = getIntent().getParcelableExtra(EXTRA_MOVIE_SHORT_INFO);
     SQLiteOpenHelper dbHelper = ContextUtils.appComponent(this).databaseHelper();
     MainServiceApi api = ContextUtils.appComponent(this).mainServiceApi();
-    DetailsInputInteractor interactor = new DetailsInputInteractor(api, dbHelper);
+
     DetailsSaveFavoriteInteractor saveFavoriteInteractor = new DetailsSaveFavoriteInteractor(dbHelper);
-    return new DetailsPresenter(movieShortInfo, saveFavoriteInteractor, interactor);
+    DetailsInputInteractor inputInteractor = new DetailsInputInteractor(api, dbHelper);
+    return new DetailsPresenter(movieShortInfo, saveFavoriteInteractor, inputInteractor);
   }
 
   @Override
@@ -111,6 +115,9 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
       .load(data.movieInfo().backDropUrl())
       .into(moviePoster);
     contentController.setData(data);
+    int colorInt = ContextCompat.getColor(this, data.isInFavorite() ? R.color.colorAccent : R.color.colorPrimary);
+    favoritesButton.setBackgroundTintList(ColorStateList.valueOf(colorInt));
+    ViewUtils.setVisibility(true, favoritesButton);
   }
 
   @Override

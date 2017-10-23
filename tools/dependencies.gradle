@@ -46,7 +46,8 @@ ext {
     "com.google.dagger:dagger-compiler:$daggerVersion",
     "com.arello-mobile:moxy-compiler:$moxyVersion",
     "com.airbnb.android:epoxy-processor:$epoxyVersion",
-    "com.android.databinding:compiler:$androidToolsGradleVersion"
+    "com.android.databinding:compiler:$androidToolsGradleVersion",
+    'com.gabrielittner.auto.value:auto-value-with:1.0.0'
   ]
 
   providedDepends = [

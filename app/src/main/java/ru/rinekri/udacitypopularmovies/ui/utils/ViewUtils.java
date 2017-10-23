@@ -11,4 +11,10 @@ public final class ViewUtils {
   public static void showSnack(View targetView, String message) {
     Snackbar.make(targetView, message, Snackbar.LENGTH_LONG).show();
   }
+
+  public static void setVisibility(boolean visible, View... views) {
+    for (View view : views) {
+      view.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+  }
 }

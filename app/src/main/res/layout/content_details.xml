@@ -18,6 +18,7 @@
         android:src="@drawable/ic_star_border"
         android:tint="@color/backgroundColor"
         app:fabSize="mini"
+        android:visibility="gone"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|end"/>
 

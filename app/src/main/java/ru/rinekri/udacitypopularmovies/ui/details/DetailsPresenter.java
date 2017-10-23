@@ -48,7 +48,10 @@ public class DetailsPresenter extends BaseMvpPresenter<DetailsMvp.PM, DetailsMvp
   @Override
   protected void onFirstViewAttach() {
     super.onFirstViewAttach();
-    elceAsyncRequestL(() -> inputInteractor.getData(movieShortInfo));
+    elceAsyncRequestLS(() -> inputInteractor.getData(movieShortInfo), pm -> {
+      this.pm = pm;
+      getViewState().showViewContent(pm);
+    });
   }
 
   void onAddToFavoritesClicked() {

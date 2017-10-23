@@ -48,7 +48,7 @@ class DetailsMvp {
     }
 
     void showMessage(@StringRes int textRes, String... options) {
-      ViewUtils.showSnack(messageView, context.getString(textRes));
+      ViewUtils.showSnack(messageView, context.getString(textRes, options));
     }
   }
 
@@ -62,7 +62,9 @@ class DetailsMvp {
     abstract List<MovieInfo> recommendedMovies();
     abstract List<MovieInfo> similarMovies();
     abstract List<MovieKeyword> keywords();
-    abstract Boolean isInFavorite();
+    abstract boolean isInFavorite();
+
+    public abstract PM withInFavorite(boolean isInFavorite);
 
     public static PM create(@NonNull MovieShortInfo movieShortInfo,
                             @NonNull List<MovieVideo> movieVideos,
