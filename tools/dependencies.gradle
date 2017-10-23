@@ -34,7 +34,9 @@ ext {
     "com.arello-mobile:moxy-app-compat:$moxyVersion",
     'jp.wasabeef:picasso-transformations:2.1.2',
     "com.airbnb.android:epoxy:$epoxyVersion",
-    "com.airbnb.android:epoxy-databinding:$epoxyVersion"
+    "com.airbnb.android:epoxy-databinding:$epoxyVersion",
+    'com.facebook.stetho:stetho:1.5.0',
+    "com.facebook.stetho:stetho-okhttp3:1.5.0"
   ]
 
   aptDepends = [
@@ -44,7 +46,8 @@ ext {
     "com.google.dagger:dagger-compiler:$daggerVersion",
     "com.arello-mobile:moxy-compiler:$moxyVersion",
     "com.airbnb.android:epoxy-processor:$epoxyVersion",
-    "com.android.databinding:compiler:$androidToolsGradleVersion"
+    "com.android.databinding:compiler:$androidToolsGradleVersion",
+    'com.gabrielittner.auto.value:auto-value-with:1.0.0'
   ]
 
   providedDepends = [

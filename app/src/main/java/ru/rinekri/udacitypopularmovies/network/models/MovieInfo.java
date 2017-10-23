@@ -26,6 +26,7 @@ public abstract class MovieInfo implements Parcelable {
   @Json(name = "release_date")
   public abstract String releaseDate();
   @Json(name = "genre_ids")
+  @Nullable
   public abstract List<Integer> genreIds();
   @Json(name = "original_title")
   public abstract String originalTitle();

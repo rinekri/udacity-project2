@@ -9,19 +9,29 @@ import ru.rinekri.udacitypopularmovies.network.models.MovieReview;
 import ru.rinekri.udacitypopularmovies.network.models.MovieVideo;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpPresenter;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
+import ru.rinekri.udacitypopularmovies.ui.base.models.ErrorConfig;
 
 @SuppressWarnings("ConstantConditions")
 @InjectViewState
 public class DetailsPresenter extends BaseMvpPresenter<DetailsMvp.PM, DetailsMvp.View> {
   @Nullable
   private DetailsMvp.Router router;
-  private SyncInteractor<MovieShortInfo, DetailsMvp.PM> inputInteractor;
+
   @NonNull
   private MovieShortInfo movieShortInfo;
+  @NonNull
+  private SyncInteractor<MovieShortInfo, DetailsMvp.PM> inputInteractor;
+  @NonNull
+  private SyncInteractor<DetailsMvp.PM, DetailsMvp.PM> changeFavoriteInteractor;
+
+  @Nullable
+  private DetailsMvp.PM pm;
 
   DetailsPresenter(@NonNull MovieShortInfo movieShortInfo,
+                   @NonNull SyncInteractor<DetailsMvp.PM, DetailsMvp.PM> changeFavoriteInteractor,
                    @NonNull SyncInteractor<MovieShortInfo, DetailsMvp.PM> inputInteractor) {
     this.movieShortInfo = movieShortInfo;
+    this.changeFavoriteInteractor = changeFavoriteInteractor;
     this.inputInteractor = inputInteractor;
   }
 
@@ -38,11 +48,20 @@ public class DetailsPresenter extends BaseMvpPresenter<DetailsMvp.PM, DetailsMvp
   @Override
   protected void onFirstViewAttach() {
     super.onFirstViewAttach();
-    elceAsyncRequestL(() -> inputInteractor.getData(movieShortInfo));
+    elceAsyncRequestLS(() -> inputInteractor.getData(movieShortInfo), pm -> {
+      this.pm = pm;
+      getViewState().showViewContent(pm);
+    });
   }
 
   void onAddToFavoritesClicked() {
-    router.showMessage("TODO: onAddToFavoritesClicked");
+    elceAsyncRequest(null,
+      () -> changeFavoriteInteractor.getData(pm),
+      (pm) -> {
+        this.pm = pm;
+        getViewState().showViewContent(pm);
+      },
+      (error) -> getViewState().showError(ErrorConfig.createFrom(error)));
   }
 
   void onMovieTitleClicked(String fullTitle) {

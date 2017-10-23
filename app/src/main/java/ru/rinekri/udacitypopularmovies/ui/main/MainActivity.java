@@ -1,5 +1,6 @@
 package ru.rinekri.udacitypopularmovies.ui.main;
 
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
@@ -36,7 +37,8 @@ public class MainActivity extends BaseMvpActivity<MainMvp.PM> implements MainMvp
   @ProvidePresenter
   public MainPresenter providePresenter() {
     MainServiceApi api = ContextUtils.appComponent(this).mainServiceApi();
-    MainInputInteractor interactor = new MainInputInteractor(api);
+    SQLiteOpenHelper dbHelper = ContextUtils.appComponent(this).databaseHelper();
+    MainInputInteractor interactor = new MainInputInteractor(api, dbHelper);
     return new MainPresenter(interactor);
   }
 

@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import ru.rinekri.udacitypopularmovies.R;
 import ru.rinekri.udacitypopularmovies.ui.base.models.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.base.models.ErrorConfig;
+import ru.rinekri.udacitypopularmovies.ui.utils.ViewUtils;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import static android.view.View.GONE;
@@ -97,10 +98,8 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
 
   @Override
   public void showEmpty(@Nullable @StringRes Integer messageRes) {
-    errorView.setVisibility(GONE);
-    emptyView.setVisibility(VISIBLE);
-    progressView.setVisibility(GONE);
-    contentView.setVisibility(GONE);
+    ViewUtils.setVisibility(false, errorView, progressView, contentView);
+    ViewUtils.setVisibility(true, emptyView);
     if (messageRes != null) {
       emptyView.setText(getString(messageRes));
     } else {
@@ -110,26 +109,20 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
 
   @Override
   public void showError(ErrorConfig errorConfig) {
-    errorView.setVisibility(VISIBLE);
-    emptyView.setVisibility(View.GONE);
-    progressView.setVisibility(GONE);
-    contentView.setVisibility(GONE);
+    ViewUtils.setVisibility(false, emptyView, progressView, contentView);
+    ViewUtils.setVisibility(true, errorView);
     errorView.setText(errorConfig.resolveTitle(this));
   }
 
   @Override
   public void showLoading() {
-    errorView.setVisibility(View.GONE);
-    emptyView.setVisibility(View.GONE);
-    progressView.setVisibility(VISIBLE);
-    contentView.setVisibility(GONE);
+    ViewUtils.setVisibility(false, errorView, emptyView, contentView);
+    ViewUtils.setVisibility(true, progressView);
   }
 
   private void switchToInitState() {
-    errorView.setVisibility(GONE);
-    emptyView.setVisibility(GONE);
-    progressView.setVisibility(GONE);
-    contentView.setVisibility(VISIBLE);
+    ViewUtils.setVisibility(false, errorView, emptyView, progressView);
+    ViewUtils.setVisibility(true, contentView);
   }
 
   @Override

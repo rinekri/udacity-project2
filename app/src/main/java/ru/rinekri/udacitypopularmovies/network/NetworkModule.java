@@ -1,5 +1,6 @@
 package ru.rinekri.udacitypopularmovies.network;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.squareup.moshi.Moshi;
 
 import java.util.concurrent.TimeUnit;
@@ -32,6 +33,7 @@ public class NetworkModule {
       .readTimeout(DEFAULT_CONNECT_TIMEOUT_MS, TimeUnit.MILLISECONDS)
       .writeTimeout(DEFAULT_CONNECT_TIMEOUT_MS, TimeUnit.MILLISECONDS)
       .addInterceptor(new ApiRequestInterceptor())
+      .addInterceptor(new StethoInterceptor())
       .addInterceptor(new HttpLoggingInterceptor().setLevel(HTTP_LOG_LEVEL))
       .build();
   }
