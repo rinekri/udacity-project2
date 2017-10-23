@@ -22,16 +22,16 @@ public class DetailsPresenter extends BaseMvpPresenter<DetailsMvp.PM, DetailsMvp
   @NonNull
   private SyncInteractor<MovieShortInfo, DetailsMvp.PM> inputInteractor;
   @NonNull
-  private SyncInteractor<DetailsMvp.PM, DetailsMvp.PM> saveFavoriteInteractor;
+  private SyncInteractor<DetailsMvp.PM, DetailsMvp.PM> changeFavoriteInteractor;
 
   @Nullable
   private DetailsMvp.PM pm;
 
   DetailsPresenter(@NonNull MovieShortInfo movieShortInfo,
-                   @NonNull SyncInteractor<DetailsMvp.PM, DetailsMvp.PM> saveFavoriteInteractor,
+                   @NonNull SyncInteractor<DetailsMvp.PM, DetailsMvp.PM> changeFavoriteInteractor,
                    @NonNull SyncInteractor<MovieShortInfo, DetailsMvp.PM> inputInteractor) {
     this.movieShortInfo = movieShortInfo;
-    this.saveFavoriteInteractor = saveFavoriteInteractor;
+    this.changeFavoriteInteractor = changeFavoriteInteractor;
     this.inputInteractor = inputInteractor;
   }
 
@@ -56,7 +56,7 @@ public class DetailsPresenter extends BaseMvpPresenter<DetailsMvp.PM, DetailsMvp
 
   void onAddToFavoritesClicked() {
     elceAsyncRequest(null,
-      () -> saveFavoriteInteractor.getData(pm),
+      () -> changeFavoriteInteractor.getData(pm),
       (pm) -> {
         this.pm = pm;
         getViewState().showViewContent(pm);

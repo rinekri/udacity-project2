@@ -17,14 +17,14 @@ import ru.rinekri.udacitypopularmovies.network.models.MovieVideo;
 import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 
-class DetailsInputInteractor implements SyncInteractor<MovieShortInfo, DetailsMvp.PM> {
+class DetailsInteractorInputContent implements SyncInteractor<MovieShortInfo, DetailsMvp.PM> {
   @NonNull
   private MainServiceApi serviceApi;
   @NonNull
   private SQLiteDatabase datataBase;
 
-  DetailsInputInteractor(@NonNull MainServiceApi serviceApi,
-                         @NonNull SQLiteOpenHelper dbHelper) {
+  DetailsInteractorInputContent(@NonNull MainServiceApi serviceApi,
+                                @NonNull SQLiteOpenHelper dbHelper) {
     this.serviceApi = serviceApi;
     datataBase = dbHelper.getReadableDatabase();
   }

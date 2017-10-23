@@ -62,9 +62,10 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
     SQLiteOpenHelper dbHelper = ContextUtils.appComponent(this).databaseHelper();
     MainServiceApi api = ContextUtils.appComponent(this).mainServiceApi();
 
-    DetailsSaveFavoriteInteractor saveFavoriteInteractor = new DetailsSaveFavoriteInteractor(dbHelper);
-    DetailsInputInteractor inputInteractor = new DetailsInputInteractor(api, dbHelper);
-    return new DetailsPresenter(movieShortInfo, saveFavoriteInteractor, inputInteractor);
+    DetailsInteractorChangeFavorite changeFavoriteInteractor
+      = new DetailsInteractorChangeFavorite(dbHelper);
+    DetailsInteractorInputContent inputInteractor = new DetailsInteractorInputContent(api, dbHelper);
+    return new DetailsPresenter(movieShortInfo, changeFavoriteInteractor, inputInteractor);
   }
 
   @Override

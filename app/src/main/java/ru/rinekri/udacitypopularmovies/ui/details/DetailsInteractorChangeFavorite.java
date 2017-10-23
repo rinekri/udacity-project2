@@ -11,11 +11,11 @@ import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContra
 import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.MovieInfoEntry.COLUMN_MOVIE_TITLE;
 import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.MovieInfoEntry.TABLE_NAME;
 
-class DetailsSaveFavoriteInteractor implements SyncInteractor<DetailsMvp.PM, DetailsMvp.PM> {
+class DetailsInteractorChangeFavorite implements SyncInteractor<DetailsMvp.PM, DetailsMvp.PM> {
   @NonNull
   private SQLiteDatabase database;
 
-  DetailsSaveFavoriteInteractor(SQLiteOpenHelper dbHelper) {
+  DetailsInteractorChangeFavorite(SQLiteOpenHelper dbHelper) {
     this.database = dbHelper.getWritableDatabase();
   }
 
