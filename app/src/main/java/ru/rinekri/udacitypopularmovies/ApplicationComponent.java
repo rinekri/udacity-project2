@@ -1,5 +1,6 @@
 package ru.rinekri.udacitypopularmovies;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -15,4 +16,5 @@ public interface ApplicationComponent {
   Context context();
   MainServiceApi mainServiceApi();
   SQLiteOpenHelper databaseHelper();
+  ContentResolver contentResolver();
 }

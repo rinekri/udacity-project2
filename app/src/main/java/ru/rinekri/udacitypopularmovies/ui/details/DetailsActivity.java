@@ -1,9 +1,9 @@
 package ru.rinekri.udacitypopularmovies.ui.details;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -59,12 +59,12 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
   @ProvidePresenter
   public DetailsPresenter providePresenter() {
     MovieShortInfo movieShortInfo = getIntent().getParcelableExtra(EXTRA_MOVIE_SHORT_INFO);
-    SQLiteOpenHelper dbHelper = ContextUtils.appComponent(this).databaseHelper();
-    MainServiceApi api = ContextUtils.appComponent(this).mainServiceApi();
+    ContentResolver contentResolver = ContextUtils.appComponent(this).contentResolver();
+    MainServiceApi mainApi = ContextUtils.appComponent(this).mainServiceApi();
 
     DetailsInteractorChangeFavorite changeFavoriteInteractor
-      = new DetailsInteractorChangeFavorite(getContentResolver());
-    DetailsInteractorInputContent inputInteractor = new DetailsInteractorInputContent(api, getContentResolver());
+      = new DetailsInteractorChangeFavorite(contentResolver);
+    DetailsInteractorInputContent inputInteractor = new DetailsInteractorInputContent(mainApi, contentResolver);
     return new DetailsPresenter(movieShortInfo, changeFavoriteInteractor, inputInteractor);
   }
 
