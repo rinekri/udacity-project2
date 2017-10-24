@@ -1,5 +1,6 @@
 package ru.rinekri.udacitypopularmovies.database;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -13,5 +14,11 @@ public class DatabaseModule {
   @ApplicationScope
   public SQLiteOpenHelper provideDatabaseHelper(Context context) {
     return new DatabaseHelper(context);
+  }
+
+  @Provides
+  @ApplicationScope
+  public ContentResolver provideContentResolver(Context context) {
+    return context.getContentResolver();
   }
 }

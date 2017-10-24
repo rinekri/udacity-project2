@@ -19,5 +19,9 @@
 
         <activity android:name=".ui.details.DetailsActivity"
                   android:parentActivityName=".ui.main.MainActivity"/>
+
+        <provider android:name=".database.providers.MovieInfoProvider"
+                  android:exported="false"
+                  android:authorities="${applicationId}"/>
     </application>
 </manifest>

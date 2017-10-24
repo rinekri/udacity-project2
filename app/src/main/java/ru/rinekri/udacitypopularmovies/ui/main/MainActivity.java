@@ -1,6 +1,6 @@
 package ru.rinekri.udacitypopularmovies.ui.main;
 
-import android.database.sqlite.SQLiteOpenHelper;
+import android.content.ContentResolver;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
@@ -15,8 +15,8 @@ import butterknife.BindView;
 import java8.util.stream.StreamSupport;
 import ru.rinekri.udacitypopularmovies.R;
 import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
-import ru.rinekri.udacitypopularmovies.ui.base.models.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
+import ru.rinekri.udacitypopularmovies.ui.base.models.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.utils.ContextUtils;
 import ru.rinekri.udacitypopularmovies.ui.utils.DialogUtils;
 
@@ -37,9 +37,9 @@ public class MainActivity extends BaseMvpActivity<MainMvp.PM> implements MainMvp
   @ProvidePresenter
   public MainPresenter providePresenter() {
     MainServiceApi api = ContextUtils.appComponent(this).mainServiceApi();
-    SQLiteOpenHelper dbHelper = ContextUtils.appComponent(this).databaseHelper();
-    MainInputInteractor interactor = new MainInputInteractor(api, dbHelper);
-    return new MainPresenter(interactor);
+    ContentResolver contentResolver = ContextUtils.appComponent(this).contentResolver();
+    MainInputInteractor interactor = new MainInputInteractor(api, contentResolver);
+    return new MainPresenter(interactor, contentResolver);
   }
 
   @Override

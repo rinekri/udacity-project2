@@ -129,7 +129,7 @@ abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpP
       if (result.data() != null) {
         LangUtils.safeInvoke(onSuccess, s -> s.accept(result.data()));
       } else if (result.error() != null) {
-        Timber.e("Loading error occurred: %s", result.error().getMessage());
+        Timber.e(result.error(), "Loading error occurred: %s", result.error().getMessage());
         LangUtils.safeInvoke(onError, e -> e.accept(result.error()));
       }
     }

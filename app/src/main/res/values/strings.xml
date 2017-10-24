@@ -6,6 +6,8 @@
     <string name="main_sort_popular_movies">Popular movies</string>
     <string name="main_sort_top_rated_movies">Top-rated movies</string>
     <string name="main_sort_favorites_movies">Favorites movies</string>
+    <string name="main_empty_no_movies">No movies</string>
+    <string name="main_empty_no_favorites">No favorite movies</string>
     <string name="empty_default">Nothing to show</string>
     <string name="error_default">Something went wrong</string>
     <string name="error_no_network">No internet connection. Check it</string>
