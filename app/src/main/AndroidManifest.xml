@@ -21,7 +21,7 @@
                   android:parentActivityName=".ui.main.MainActivity"/>
 
         <provider android:name=".database.providers.MovieInfoProvider"
-                  android:authorities="ru.rinekri.udacitypopularmovies"
-                  android:exported="false"/>
+                  android:exported="false"
+                  android:authorities="${applicationId}"/>
     </application>
 </manifest>

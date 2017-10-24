@@ -32,12 +32,6 @@ public class MovieInfoProvider extends ContentProvider {
 
   @Nullable
   @Override
-  public String getType(@NonNull Uri uri) {
-    return null;
-  }
-
-  @Nullable
-  @Override
   public Uri insert(@NonNull Uri uri,
                     @Nullable ContentValues values) {
     return null;
@@ -56,5 +50,11 @@ public class MovieInfoProvider extends ContentProvider {
                     @Nullable String selection,
                     @Nullable String[] selectionArgs) {
     return 0;
+  }
+
+  @Nullable
+  @Override
+  public String getType(@NonNull Uri uri) {
+    return null;
   }
 }
