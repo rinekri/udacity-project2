@@ -16,7 +16,7 @@ import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 import ru.rinekri.udacitypopularmovies.ui.utils.LangUtils;
 
-import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Content.movieInfoUriWithId;
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Provider.movieInfoUriWithId;
 
 class DetailsInteractorInputContent implements SyncInteractor<MovieShortInfo, DetailsMvp.PM> {
   @NonNull

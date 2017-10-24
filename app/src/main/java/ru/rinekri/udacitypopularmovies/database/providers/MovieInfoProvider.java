@@ -15,9 +15,9 @@ import ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract;
 import timber.log.Timber;
 
 import static android.R.attr.id;
-import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Content.PATH_AUTHORITY;
-import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Content.PATH_MOVIE_INFO;
-import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Content.parseMovieInfoId;
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Provider.PATH_AUTHORITY;
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Provider.PATH_MOVIE_INFO;
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Provider.parseMovieInfoId;
 import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Entry.COLUMN_MOVIE_ID;
 import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Entry.TABLE_NAME;
 

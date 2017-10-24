@@ -19,7 +19,7 @@ import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 import ru.rinekri.udacitypopularmovies.ui.base.models.MovieSortType;
 import ru.rinekri.udacitypopularmovies.ui.details.MovieShortInfo;
 
-import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Content.URI_MOVIE_INFO;
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Provider.URI_MOVIE_INFO;
 import static ru.rinekri.udacitypopularmovies.ui.utils.LangUtils.safeInvokeOrThrow;
 
 @InjectViewState

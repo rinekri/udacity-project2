@@ -25,7 +25,7 @@ public final class MovieInfoContract {
       "DROP TABLE IF EXISTS " + Entry.TABLE_NAME;
   }
 
-  public static final class Content {
+  public static final class Provider {
     public static final String PATH_AUTHORITY = BuildConfig.APPLICATION_ID;
     public static final String PATH_MOVIE_INFO = "movie_info";
 

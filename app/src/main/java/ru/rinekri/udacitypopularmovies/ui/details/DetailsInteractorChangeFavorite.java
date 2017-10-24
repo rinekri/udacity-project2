@@ -6,8 +6,8 @@ import android.support.annotation.NonNull;
 
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 
-import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Content.URI_MOVIE_INFO;
-import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Content.movieInfoUriWithId;
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Provider.URI_MOVIE_INFO;
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Provider.movieInfoUriWithId;
 import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Entry.COLUMN_MOVIE_ID;
 import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Entry.COLUMN_MOVIE_TITLE;
 

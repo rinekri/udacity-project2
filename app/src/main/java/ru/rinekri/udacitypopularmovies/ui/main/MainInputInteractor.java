@@ -48,7 +48,7 @@ class MainInputInteractor implements SyncInteractor<MovieSortType, MainMvp.PM> {
   @NonNull
   private List<MovieInfo> getFavoriteMovies() throws Exception {
     List<MovieInfo> movies = new ArrayList<>();
-    Cursor cursor = contentResolver.query(MovieInfoContract.Content.URI_MOVIE_INFO,
+    Cursor cursor = contentResolver.query(MovieInfoContract.Provider.URI_MOVIE_INFO,
       null, null, null, null, null);
     LangUtils.check(cursor != null);
     try {
