@@ -12,28 +12,30 @@ import com.arellomobile.mvp.InjectViewState;
 import java.util.Arrays;
 import java.util.List;
 
-import ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract;
+import ru.rinekri.udacitypopularmovies.R;
 import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpPresenter;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 import ru.rinekri.udacitypopularmovies.ui.base.models.MovieSortType;
 import ru.rinekri.udacitypopularmovies.ui.details.MovieShortInfo;
 
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Content.URI_MOVIE_INFO;
 import static ru.rinekri.udacitypopularmovies.ui.utils.LangUtils.safeInvokeOrThrow;
 
 @InjectViewState
 public class MainPresenter extends BaseMvpPresenter<MainMvp.PM, MainMvp.View> {
   private static final List<MovieSortType> SORT_TYPES = Arrays.asList(MovieSortType.values());
   private static final MovieSortType INIT_SORT_TYPE = MovieSortType.Popular;
-
-  @Nullable
-  private MainMvp.Router router;
+  @NonNull
   private SyncInteractor<MovieSortType, MainMvp.PM> interactor;
+  @NonNull
   private ContentResolver contentResolver;
 
   private MovieSortType currentSortType = INIT_SORT_TYPE;
   @Nullable
   private ContentObserver contentObserver;
+  @Nullable
+  private MainMvp.Router router;
 
   MainPresenter(@NonNull SyncInteractor<MovieSortType, MainMvp.PM> interactor,
                 @NonNull ContentResolver contentResolver) {
@@ -48,15 +50,17 @@ public class MainPresenter extends BaseMvpPresenter<MainMvp.PM, MainMvp.View> {
   @Override
   protected void onFirstViewAttach() {
     super.onFirstViewAttach();
-    showInitContent(currentSortType);
-    loadViewContent(currentSortType);
+    showInitContent();
+    loadViewContent();
     contentObserver = new ContentObserver(new Handler()) {
       @Override
       public void onChange(boolean selfChange, Uri uri) {
-        loadViewContent(currentSortType);
+        if (currentSortType == MovieSortType.Favorites) {
+          loadViewContent();
+        }
       }
     };
-    contentResolver.registerContentObserver(MovieInfoContract.Content.URI_MOVIE_INFO, true, contentObserver);
+    contentResolver.registerContentObserver(URI_MOVIE_INFO, true, contentObserver);
   }
 
   @Override
@@ -83,17 +87,26 @@ public class MainPresenter extends BaseMvpPresenter<MainMvp.PM, MainMvp.View> {
 
   void onMovieSortChanged(MovieSortType sortType) {
     currentSortType = sortType;
-    showInitContent(currentSortType);
-    loadViewContent(currentSortType);
+    showInitContent();
+    loadViewContent();
   }
 
-  private void loadViewContent(@NonNull MovieSortType sortType) {
+  private void loadViewContent() {
     abortAsyncRequests();
-    elceAsyncRequestL(() -> interactor.getData(sortType));
+    elceAsyncRequestLS(() -> interactor.getData(currentSortType), pm -> {
+      if (pm.movies().isEmpty()) {
+        int messageRes = currentSortType == MovieSortType.Favorites
+          ? R.string.main_empty_no_favorites
+          : R.string.main_empty_no_movies;
+        getViewState().showEmpty(messageRes);
+      } else {
+        getViewState().showViewContent(pm);
+      }
+    });
   }
 
-  private void showInitContent(@NonNull MovieSortType sortType) {
-    MainMvp.IM initModel = MainMvp.IM.create(SORT_TYPES, sortType);
+  private void showInitContent() {
+    MainMvp.IM initModel = MainMvp.IM.create(SORT_TYPES, currentSortType);
     getViewState().showInitContent(initModel);
   }
 }
