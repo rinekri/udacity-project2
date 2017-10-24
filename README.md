@@ -27,8 +27,8 @@ In the movies detail screen, a user can tap a button (for example, a star) to ma
 In a background thread, app queries the **/movie/popular** or **/movie/top_rated** API for the sort criteria specified in the settings menu. | Resolved
 App requests for related videos for a selected movie via the **/movie/{id}/videos** endpoint in a background thread and displays those details when the user selects a movie. | Resolved
 App requests for user reviews for a selected movie via the **/movie/{id}/reviews** endpoint in a background thread and displays those details when the user selects a movie. | Resolved
-The titles and ids of the user's favorite movies are stored in a **ContentProvider backed by a SQLite database**. This ContentProvider is updated whenever the user favorites or unfavorites a movie. | In Progress
-When the "favorites" setting option is selected, the main view displays the entire favorites collection based on movie ids stored in the ContentProvider. | In Progress
+The titles and ids of the user's favorite movies are stored in a **ContentProvider backed by a SQLite database**. This ContentProvider is updated whenever the user favorites or unfavorites a movie. | Resolved
+When the "favorites" setting option is selected, the main view displays the entire favorites collection based on movie ids stored in the ContentProvider. | Resolved
 
 ## Goals | Additional
 Goal | Progress
