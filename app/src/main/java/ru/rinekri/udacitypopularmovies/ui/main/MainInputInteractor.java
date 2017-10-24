@@ -1,8 +1,7 @@
 package ru.rinekri.udacitypopularmovies.ui.main;
 
+import android.content.ContentResolver;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -13,17 +12,18 @@ import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 import ru.rinekri.udacitypopularmovies.ui.base.models.MovieSortType;
+import ru.rinekri.udacitypopularmovies.ui.utils.LangUtils;
 
 class MainInputInteractor implements SyncInteractor<MovieSortType, MainMvp.PM> {
   @NonNull
   private MainServiceApi mainServiceApi;
   @NonNull
-  private SQLiteDatabase database;
+  private ContentResolver contentResolver;
 
   MainInputInteractor(@NonNull MainServiceApi mainServiceApi,
-                      @NonNull SQLiteOpenHelper dbHelper) {
+                      @NonNull ContentResolver contentResolver) {
     this.mainServiceApi = mainServiceApi;
-    database = dbHelper.getReadableDatabase();
+    this.contentResolver = contentResolver;
   }
 
   @Override
@@ -45,21 +45,20 @@ class MainInputInteractor implements SyncInteractor<MovieSortType, MainMvp.PM> {
     return MainMvp.PM.create(movies);
   }
 
-  //TODO: Transfer to ContentProvider
   @NonNull
   private List<MovieInfo> getFavoriteMovies() throws Exception {
     List<MovieInfo> movies = new ArrayList<>();
-
-    Cursor request = database.query(MovieInfoContract.Entry.TABLE_NAME,
-      null, null, null, null, null, null);
+    Cursor cursor = contentResolver.query(MovieInfoContract.Content.URI_MOVIE_INFO,
+      null, null, null, null, null);
+    LangUtils.check(cursor != null);
     try {
-      while (request.moveToNext()) {
-        String movieId = request.getString(request.getColumnIndex(MovieInfoContract.Entry.COLUMN_MOVIE_ID));
+      while (cursor.moveToNext()) {
+        String movieId = cursor.getString(cursor.getColumnIndex(MovieInfoContract.Entry.COLUMN_MOVIE_ID));
         movies.add(mainServiceApi.getMovieDetails(movieId).execute().body());
       }
-      request.close();
+      cursor.close();
     } finally {
-      request.close();
+      cursor.close();
     }
     return movies;
   }
