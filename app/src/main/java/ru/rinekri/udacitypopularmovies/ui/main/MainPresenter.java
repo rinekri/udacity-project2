@@ -1,5 +1,9 @@
 package ru.rinekri.udacitypopularmovies.ui.main;
 
+import android.content.ContentResolver;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -8,12 +12,14 @@ import com.arellomobile.mvp.InjectViewState;
 import java.util.Arrays;
 import java.util.List;
 
+import ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract;
 import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpPresenter;
-import ru.rinekri.udacitypopularmovies.ui.base.models.MovieSortType;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
+import ru.rinekri.udacitypopularmovies.ui.base.models.MovieSortType;
 import ru.rinekri.udacitypopularmovies.ui.details.MovieShortInfo;
-import ru.rinekri.udacitypopularmovies.ui.utils.LangUtils;
+
+import static ru.rinekri.udacitypopularmovies.ui.utils.LangUtils.safeInvokeOrThrow;
 
 @InjectViewState
 public class MainPresenter extends BaseMvpPresenter<MainMvp.PM, MainMvp.View> {
@@ -23,9 +29,16 @@ public class MainPresenter extends BaseMvpPresenter<MainMvp.PM, MainMvp.View> {
   @Nullable
   private MainMvp.Router router;
   private SyncInteractor<MovieSortType, MainMvp.PM> interactor;
+  private ContentResolver contentResolver;
 
-  MainPresenter(SyncInteractor<MovieSortType, MainMvp.PM> interactor) {
+  private MovieSortType currentSortType = INIT_SORT_TYPE;
+  @Nullable
+  private ContentObserver contentObserver;
+
+  MainPresenter(@NonNull SyncInteractor<MovieSortType, MainMvp.PM> interactor,
+                @NonNull ContentResolver contentResolver) {
     this.interactor = interactor;
+    this.contentResolver = contentResolver;
   }
 
   void setRouter(@NonNull MainMvp.Router router) {
@@ -35,8 +48,15 @@ public class MainPresenter extends BaseMvpPresenter<MainMvp.PM, MainMvp.View> {
   @Override
   protected void onFirstViewAttach() {
     super.onFirstViewAttach();
-    showInitContent(INIT_SORT_TYPE);
-    loadViewContent(INIT_SORT_TYPE);
+    showInitContent(currentSortType);
+    loadViewContent(currentSortType);
+    contentObserver = new ContentObserver(new Handler()) {
+      @Override
+      public void onChange(boolean selfChange, Uri uri) {
+        loadViewContent(currentSortType);
+      }
+    };
+    contentResolver.registerContentObserver(MovieInfoContract.Content.URI_MOVIE_INFO, true, contentObserver);
   }
 
   @Override
@@ -45,25 +65,35 @@ public class MainPresenter extends BaseMvpPresenter<MainMvp.PM, MainMvp.View> {
     super.destroyView(view);
   }
 
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    if (contentObserver != null) {
+      contentResolver.unregisterContentObserver(contentObserver);
+    }
+  }
+
   void onMoviePosterClicked(MovieInfo movieInfo) {
-    LangUtils.safeInvokeOrThrow(router, r -> r.showDetailInfo(MovieShortInfo.from(movieInfo)));
+    safeInvokeOrThrow(router, r -> r.showDetailInfo(MovieShortInfo.from(movieInfo)));
   }
 
   void onMoviePosterLongClicked(MovieInfo movieInfo) {
-    LangUtils.safeInvokeOrThrow(router, r -> r.showMessage(movieInfo.originalTitle()));
+    safeInvokeOrThrow(router, r -> r.showMessage(movieInfo.originalTitle()));
   }
 
   void onMovieSortChanged(MovieSortType sortType) {
-    showInitContent(sortType);
-    loadViewContent(sortType);
+    currentSortType = sortType;
+    showInitContent(currentSortType);
+    loadViewContent(currentSortType);
   }
 
-  private void loadViewContent(MovieSortType sortType) {
+  private void loadViewContent(@NonNull MovieSortType sortType) {
     abortAsyncRequests();
     elceAsyncRequestL(() -> interactor.getData(sortType));
   }
 
-  private void showInitContent(MovieSortType sortType) {
-    getViewState().showInitContent(MainMvp.IM.create(SORT_TYPES, sortType));
+  private void showInitContent(@NonNull MovieSortType sortType) {
+    MainMvp.IM initModel = MainMvp.IM.create(SORT_TYPES, sortType);
+    getViewState().showInitContent(initModel);
   }
 }

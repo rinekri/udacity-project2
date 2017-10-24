@@ -39,7 +39,7 @@ public class MainActivity extends BaseMvpActivity<MainMvp.PM> implements MainMvp
     MainServiceApi api = ContextUtils.appComponent(this).mainServiceApi();
     ContentResolver contentResolver = ContextUtils.appComponent(this).contentResolver();
     MainInputInteractor interactor = new MainInputInteractor(api, contentResolver);
-    return new MainPresenter(interactor);
+    return new MainPresenter(interactor, contentResolver);
   }
 
   @Override
