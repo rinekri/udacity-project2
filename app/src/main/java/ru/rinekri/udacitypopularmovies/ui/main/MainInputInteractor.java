@@ -50,11 +50,11 @@ class MainInputInteractor implements SyncInteractor<MovieSortType, MainMvp.PM> {
   private List<MovieInfo> getFavoriteMovies() throws Exception {
     List<MovieInfo> movies = new ArrayList<>();
 
-    Cursor request = database.query(MovieInfoContract.MovieInfoEntry.TABLE_NAME,
+    Cursor request = database.query(MovieInfoContract.Entry.TABLE_NAME,
       null, null, null, null, null, null);
     try {
       while (request.moveToNext()) {
-        String movieId = request.getString(request.getColumnIndex(MovieInfoContract.MovieInfoEntry.COLUMN_MOVIE_ID));
+        String movieId = request.getString(request.getColumnIndex(MovieInfoContract.Entry.COLUMN_MOVIE_ID));
         movies.add(mainServiceApi.getMovieDetails(movieId).execute().body());
       }
       request.close();

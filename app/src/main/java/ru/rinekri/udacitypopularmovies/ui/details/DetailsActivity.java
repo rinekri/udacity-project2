@@ -63,7 +63,7 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
     MainServiceApi api = ContextUtils.appComponent(this).mainServiceApi();
 
     DetailsInteractorChangeFavorite changeFavoriteInteractor
-      = new DetailsInteractorChangeFavorite(dbHelper);
+      = new DetailsInteractorChangeFavorite(getContentResolver());
     DetailsInteractorInputContent inputInteractor = new DetailsInteractorInputContent(api, getContentResolver());
     return new DetailsPresenter(movieShortInfo, changeFavoriteInteractor, inputInteractor);
   }

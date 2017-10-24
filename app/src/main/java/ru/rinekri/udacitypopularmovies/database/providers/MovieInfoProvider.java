@@ -15,11 +15,11 @@ import ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract;
 import timber.log.Timber;
 
 import static android.R.attr.id;
-import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.MovieInfoContent.PATH_AUTHORITY;
-import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.MovieInfoContent.PATH_MOVIE_INFO;
-import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.MovieInfoContent.parseMovieInfoId;
-import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.MovieInfoEntry.COLUMN_MOVIE_ID;
-import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.MovieInfoEntry.TABLE_NAME;
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Content.PATH_AUTHORITY;
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Content.PATH_MOVIE_INFO;
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Content.parseMovieInfoId;
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Entry.COLUMN_MOVIE_ID;
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.Entry.TABLE_NAME;
 
 public class MovieInfoProvider extends ContentProvider {
   private static final int CODE_MOVIE_INFO_ALL = 100;
@@ -65,9 +65,9 @@ public class MovieInfoProvider extends ContentProvider {
   private Cursor queryMovieInfoOne(@NonNull Uri uri,
                                    @Nullable String[] projection,
                                    @Nullable String sortOrder) {
-    String request = MovieInfoContract.MovieInfoEntry.COLUMN_MOVIE_ID + "=?";
+    String request = MovieInfoContract.Entry.COLUMN_MOVIE_ID + "=?";
     return dbHelper.getReadableDatabase()
-      .query(MovieInfoContract.MovieInfoEntry.TABLE_NAME, projection, request,
+      .query(MovieInfoContract.Entry.TABLE_NAME, projection, request,
         new String[]{parseMovieInfoId(uri)}, null, null, sortOrder);
   }
 
