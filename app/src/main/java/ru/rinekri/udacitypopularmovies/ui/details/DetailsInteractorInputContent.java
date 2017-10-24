@@ -16,8 +16,7 @@ import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 import ru.rinekri.udacitypopularmovies.ui.utils.LangUtils;
 
-import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.MovieInfoContent.URI_MOVIE_INFO;
-import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.MovieInfoContent.withId;
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.MovieInfoContent.movieInfoUriWithId;
 
 class DetailsInteractorInputContent implements SyncInteractor<MovieShortInfo, DetailsMvp.PM> {
   @NonNull
@@ -45,7 +44,7 @@ class DetailsInteractorInputContent implements SyncInteractor<MovieShortInfo, De
   }
 
   private boolean isMovieInFavorite(String movieId) throws Exception {
-    Cursor cursor = contentResolver.query(withId(URI_MOVIE_INFO, movieId), null, null, null, null);
+    Cursor cursor = contentResolver.query(movieInfoUriWithId(movieId), null, null, null, null);
     LangUtils.check(cursor != null);
     try {
       return cursor.moveToFirst();

@@ -30,14 +30,13 @@ public final class MovieInfoContract {
     public static final String PATH_MOVIE_INFO = "movie_info";
 
     private static final Uri URI_BASE = Uri.parse("content://" + PATH_AUTHORITY);
-    public static final Uri URI_MOVIE_INFO = Uri.withAppendedPath(URI_BASE, PATH_MOVIE_INFO);
+    private static final Uri URI_MOVIE_INFO = Uri.withAppendedPath(URI_BASE, PATH_MOVIE_INFO);
 
-    public static Uri withId(@NonNull Uri contentUri,
-                             @NonNull String id) {
-      return contentUri.buildUpon().appendEncodedPath(id).build();
+    public static Uri movieInfoUriWithId(@NonNull String id) {
+      return URI_MOVIE_INFO.buildUpon().appendEncodedPath(id).build();
     }
 
-    public static String parseId(@NonNull Uri contentUri) {
+    public static String parseMovieInfoId(@NonNull Uri contentUri) {
       String movieId = contentUri.getLastPathSegment();
       return movieId == null ? "-1" : movieId;
     }
