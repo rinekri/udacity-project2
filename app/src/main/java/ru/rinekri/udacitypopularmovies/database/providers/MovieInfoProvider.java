@@ -10,8 +10,8 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import ru.rinekri.udacitypopularmovies.database.DatabaseHelper;
 import ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract;
-import ru.rinekri.udacitypopularmovies.ui.utils.ContextUtils;
 import timber.log.Timber;
 
 import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.MovieInfoContent.PATH_AUTHORITY;
@@ -34,7 +34,7 @@ public class MovieInfoProvider extends ContentProvider {
 
   @Override
   public boolean onCreate() {
-    dbHelper = ContextUtils.appComponent(getContext()).databaseHelper();
+    dbHelper = new DatabaseHelper(getContext());
     return true;
   }
 

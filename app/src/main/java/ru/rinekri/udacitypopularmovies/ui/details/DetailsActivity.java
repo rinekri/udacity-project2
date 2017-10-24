@@ -64,7 +64,7 @@ public class DetailsActivity extends BaseMvpActivity<DetailsMvp.PM> implements D
 
     DetailsInteractorChangeFavorite changeFavoriteInteractor
       = new DetailsInteractorChangeFavorite(dbHelper);
-    DetailsInteractorInputContent inputInteractor = new DetailsInteractorInputContent(api, dbHelper);
+    DetailsInteractorInputContent inputInteractor = new DetailsInteractorInputContent(api, getContentResolver());
     return new DetailsPresenter(movieShortInfo, changeFavoriteInteractor, inputInteractor);
   }
 

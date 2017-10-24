@@ -1,13 +1,11 @@
 package ru.rinekri.udacitypopularmovies.ui.details;
 
+import android.content.ContentResolver;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract;
 import ru.rinekri.udacitypopularmovies.network.models.MovieCharacter;
 import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 import ru.rinekri.udacitypopularmovies.network.models.MovieKeyword;
@@ -16,17 +14,21 @@ import ru.rinekri.udacitypopularmovies.network.models.MovieTitle;
 import ru.rinekri.udacitypopularmovies.network.models.MovieVideo;
 import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
+import ru.rinekri.udacitypopularmovies.ui.utils.LangUtils;
+
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.MovieInfoContent.URI_MOVIE_INFO;
+import static ru.rinekri.udacitypopularmovies.database.contracts.MovieInfoContract.MovieInfoContent.withId;
 
 class DetailsInteractorInputContent implements SyncInteractor<MovieShortInfo, DetailsMvp.PM> {
   @NonNull
   private MainServiceApi serviceApi;
   @NonNull
-  private SQLiteDatabase datataBase;
+  private ContentResolver contentResolver;
 
   DetailsInteractorInputContent(@NonNull MainServiceApi serviceApi,
-                                @NonNull SQLiteOpenHelper dbHelper) {
+                                @NonNull ContentResolver contentResolver) {
     this.serviceApi = serviceApi;
-    datataBase = dbHelper.getReadableDatabase();
+    this.contentResolver = contentResolver;
   }
 
   @Override
@@ -42,10 +44,9 @@ class DetailsInteractorInputContent implements SyncInteractor<MovieShortInfo, De
       movieCharacters, recommendedMovies, similarMovies, keywords, isMovieInFavorite(movieInfo.id()));
   }
 
-  //  TODO: Move logic to ContentProvider
   private boolean isMovieInFavorite(String movieId) throws Exception {
-    Cursor cursor = datataBase.rawQuery("SELECT * FROM " + MovieInfoContract.MovieInfoEntry.TABLE_NAME + " WHERE " +
-      MovieInfoContract.MovieInfoEntry.COLUMN_MOVIE_ID + "=?", new String[]{movieId});
+    Cursor cursor = contentResolver.query(withId(URI_MOVIE_INFO, movieId), null, null, null, null);
+    LangUtils.check(cursor != null);
     try {
       return cursor.moveToFirst();
     } finally {
