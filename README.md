@@ -57,3 +57,4 @@ Support Libs (ConstraintLayout too)</br>
 StreamsSupport</br>
 retrolambda</br>
 Epoxy</br>
+Stetho</br>
