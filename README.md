@@ -37,7 +37,7 @@ Use Service's | Plan
 Use BroadcastReceiver's | Plan
 Use JobDispatcher (or alternative) | Plan
 Use push notifications | Plan
-Use ContentProvider/Resolver | Plan
+Use ContentProvider/Resolver | Used
 Use SharedPreferences | Plan
 Use AsynkTaskLoader | Plan
 Use PreferenceFragment | Plan
