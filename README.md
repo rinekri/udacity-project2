@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/Mahtalitet/udacity-project2.svg?branch=master)](https://travis-ci.org/Mahtalitet/udacity-project2)
 
-![Udacity logo](https://www.kartikarora.me/img/blog/nanodegree/andnano.jpeg)
+[![Udacity logo](https://s3-us-west-1.amazonaws.com/udacity-content/images/reviews/twitter-thumbnail-neutral.png)](https://review.udacity.com/#!/reviews/816585/shared)
 
 # Android Developer Nanodegree
 Udacity Project - Popular Movies, Stage 2
